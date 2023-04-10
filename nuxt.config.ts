@@ -1,4 +1,8 @@
 export default defineNuxtConfig({
+  app: {
+    baseURL: '/oral-history-project/',
+  },
+
   buildModules: [
     '@nuxtjs/google-fonts',
   ],
