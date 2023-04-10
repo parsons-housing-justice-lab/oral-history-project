@@ -1,0 +1,24 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxtjs/google-fonts": "^3.0.0",
+    "autoprefixer": "^10.4.14",
+    "nuxt": "^3.3.2",
+    "postcss": "^8.4.21",
+    "postcss-custom-media": "^9.1.2"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.4.7",
+    "airtable": "^0.11.6",
+    "mapbox-gl": "^2.13.0",
+    "pinia": "^2.0.33"
+  }
+}
