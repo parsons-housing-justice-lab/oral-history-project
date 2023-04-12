@@ -1,0 +1,24 @@
+import { defineStore } from 'pinia';
+import { getInterviews } from "@/connectors/airtable";
+
+export const useInterviewsStore = defineStore('interviews', {
+  state: () => ({
+    interviews: [],
+  }),
+
+  getters: {
+    byId: state => id => state.interviews
+      .filter(({ Id }) => '' + Id === id),
+
+    byProject: state => id => state.interviews
+      .filter(({ Projects }) => Projects.includes(id)),
+  },
+
+  actions: {
+    async loadInterviews() {
+      if (this.interviews.length > 0) return;
+      this.interviews = await getInterviews();
+      console.log(this.interviews);
+    },
+  },
+});

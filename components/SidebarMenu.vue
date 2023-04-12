@@ -1,0 +1,49 @@
+<template>
+  <nav class="sidebar-menu">
+    <ol>
+      <li>
+        <NuxtLink to="/about">About</NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/why-oral-history">Why Oral History?</NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/projects">Oral History Projects</NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/browse">Browse</NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/get-involved">Get Involved</NuxtLink>
+      </li>
+    </ol>
+  </nav>
+</template>
+
+<script>
+export default {
+}
+</script>
+
+<style scoped>
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-menu ol {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+</style>
+
+<style>
+.sidebar-menu a {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+</style>

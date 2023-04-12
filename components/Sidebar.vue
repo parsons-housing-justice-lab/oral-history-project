@@ -3,6 +3,7 @@
     <SidebarSection class="top-section">
       <h1>{{title}}</h1>
       <div class="top-section-content">
+        <SidebarMenu />
         <!--
         <SectorPicker /> 
         <Search />
@@ -68,6 +69,12 @@ h1 {
   margin-top: 0.5em;
 }
 
+.top-section {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
 @media (--mobile) {
   .sidebar {
     left: 0.5rem;
@@ -91,11 +98,5 @@ h1 {
   .top-section-content {
     width: 100%;
   }
-}
-
-.top-section {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
 }
 </style>

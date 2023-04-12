@@ -3,6 +3,10 @@ export default defineNuxtConfig({
     baseURL: '/oral-history-project/',
   },
 
+  generate: {
+    fallback: true,
+  },
+
   buildModules: [
     '@nuxtjs/google-fonts',
   ],

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h2>Home</h2>
+    <h2>Why Oral History?</h2>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage',
 }
 </script>
 
-<style></style>
+<style scoped>
+</style>

@@ -12,7 +12,7 @@ export default {
 <style>
 .sidebar-section {
   background: white;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 1rem;
 }
 </style>
