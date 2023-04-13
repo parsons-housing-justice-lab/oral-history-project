@@ -1,13 +1,84 @@
 <template>
   <div>
-    <h2>Oral History Projects</h2>
-    <h3>{{ project.Name }}</h3>
-    <h4>{{ interview.Name }}</h4>
-    <div class="interview-content">
-      <div class="index" v-html="$mdRenderer.render(interview.Index || '')" />
-      {{ interview.Description }}
-      <!-- TODO embed -->
-      <div>{{ interview }}</div>
+    <h2>{{ interview.Name }}</h2>
+
+    <div class="fields">
+      <div class="row">
+        <div class="field">
+          <div class="field-label">Collection</div>
+          <div class="field-value">{{ project.Name }}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <div class="field-label">Interviewer</div>
+          <div class="field-value">{{ interview.Interviewer }}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <div class="field-label">Date</div>
+          <div class="field-value">{{ interview.Date }}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <div class="field-label">Language</div>
+          <div class="field-value">{{ interview.Language }}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field description-column-left">
+          <div class="field-label">Interview Description</div>
+          <div class="field-value">{{ interview.Description }}</div>
+        </div>
+        <div class="column description-column-right">
+          <div class="field">
+            <div class="field-label">People</div>
+            <div class="field-value" v-html="$mdRenderer.render(interview.People || '')" />
+          </div>
+          <div class="field">
+            <div class="field-label">Topics</div>
+            <div class="field-value" v-html="$mdRenderer.render(interview.Topics || '')" />
+          </div>
+          <div class="field">
+            <div class="field-label">Places</div>
+            <div class="field-value" v-html="$mdRenderer.render(interview.Places || '')" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <iframe
+            width="100%"
+            height="100"
+            scrolling="no"
+            frameborder="no"
+            allow="autoplay"
+            :src="interview['Audio Link']"
+          ></iframe>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <div class="field-label">Index</div>
+          <div class="field-value index" v-html="$mdRenderer.render(interview.Index || '')" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <div class="field-label">Transcription</div>
+          <div class="field-value"
+            v-html="$mdRenderer.render(interview.Transcription || '')" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <div class="field-label">Citation</div>
+          <div class="field-value"
+            v-html="$mdRenderer.render(interview.Citation || '')" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -24,7 +95,6 @@ export default {
   },
 
   /*
-<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src=""></iframe>
   */
 
   computed: {
@@ -62,5 +132,46 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.field-label {
+  text-transform: uppercase;
+}
+
+.description-column-left {
+  width: 67%
+}
+
+.description-column-right {
+  width: 33%
+}
+
+.index {
+  background: #F1F0F0;
+  padding: 1rem;
 }
 </style>
