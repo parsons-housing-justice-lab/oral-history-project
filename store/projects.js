@@ -9,6 +9,9 @@ export const useProjectsStore = defineStore('projects', {
   getters: {
     byId: state => id => state.projects
       .filter(({ Id }) => '' + Id === id),
+
+    bySlug: state => slug => state.projects
+      .filter(({ Slug }) => Slug === slug),
   },
 
   actions: {

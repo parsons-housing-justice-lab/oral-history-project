@@ -23,21 +23,25 @@ export default {
     await this.loadInterviews();
   },
 
+  /*
+<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src=""></iframe>
+  */
+
   computed: {
     ...mapState(useProjectsStore, {
-      projectById: 'byId',
+      projectBySlug: 'bySlug',
     }),
 
     ...mapState(useInterviewsStore, {
-      interviewById: 'byId',
+      interviewBySlug: 'bySlug',
     }),
 
     interview() {
-      return this.interviewById(this.$route.params.id)?.[0] ?? {};
+      return this.interviewBySlug(this.$route.params.slug)?.[0] ?? {};
     },
 
     project() {
-      return this.projectById(this.$route.params.project)?.[0] ?? {};
+      return this.projectBySlug(this.$route.params.project)?.[0] ?? {};
     },
   },
 

@@ -10,6 +10,9 @@ export const useInterviewsStore = defineStore('interviews', {
     byId: state => id => state.interviews
       .filter(({ Id }) => '' + Id === id),
 
+    bySlug: state => slug => state.interviews
+      .filter(({ Slug }) => Slug === slug),
+
     byProject: state => id => state.interviews
       .filter(({ Projects }) => Projects.includes(id)),
   },

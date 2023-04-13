@@ -5,9 +5,9 @@
       <ul>
         <li
           v-for="project in projects"
-          :key="project.Id"
+          :key="project.Slug"
         >
-          <NuxtLink :to="`/projects/${project.Id}`">{{ project.Name }}</NuxtLink>
+          <NuxtLink :to="`/projects/${project.Slug}`">{{ project.Name }}</NuxtLink>
         </li>
       </ul>
     </div>

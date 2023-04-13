@@ -8,9 +8,9 @@
       <ul>
         <li
           v-for="interview in interviews"
-          :key="interview.Id"
+          :key="interview.Slug"
         >
-          <NuxtLink :to="`/projects/${project.Id}/interviews/${interview.Id}`">
+          <NuxtLink :to="`/projects/${project.Slug}/interviews/${interview.Slug}`">
             {{ interview.Name }}
           </NuxtLink>
         </li>
@@ -32,7 +32,7 @@ export default {
 
   computed: {
     ...mapState(useProjectsStore, {
-      projectById: 'byId',
+      projectBySlug: 'bySlug',
     }),
 
     ...mapState(useInterviewsStore, {
@@ -44,7 +44,7 @@ export default {
     },
 
     project() {
-      return this.projectById(this.$route.params.id)?.[0] ?? {};
+      return this.projectBySlug(this.$route.params.slug)?.[0] ?? {};
     },
   },
 
