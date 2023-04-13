@@ -1,1 +1,0 @@
-import{a as e,b as o,o as t,e as s}from"./entry.b037ea2f.js";const n={},c=s("h2",null,"Get Involved",-1),a=[c];function r(_,d,l,p,i,f){return t(),o("div",null,a)}const v=e(n,[["render",r]]);export{v as default};
