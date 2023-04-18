@@ -1,0 +1,1 @@
+import{a as e,b as o,o as t,e as s}from"./entry.f8a310bf.js";const n={},c=s("h2",null,"Get Involved",-1),a=[c];function r(_,d,l,p,i,f){return t(),o("div",null,a)}const v=e(n,[["render",r]]);export{v as default};
