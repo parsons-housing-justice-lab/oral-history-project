@@ -13,15 +13,6 @@
     <div class="content">
       <slot />
     </div>
-
-      <!--
-    <InfoButton />
-    <LogoButton />
-    <LayerPickerButton />
-    <InfoWindow v-if="infoVisible" />
-    <ImageModal v-if="imageModalOpen" />
-    <LayerPicker v-if="layerPickerVisible" />
-      -->
   </main>
 </template>
 
@@ -38,7 +29,6 @@ export default {
     const params = this.$route.query;
     this.$store.dispatch('map/loadQueryParams', { params });
     this.$store.dispatch('data/loadLocations', { params });
-    this.$store.dispatch('content/loadSectors');
     */
   },
 
@@ -46,20 +36,6 @@ export default {
     ...mapState(useTextBlocksStore, {
       title: store => store.byType('Title')[0],
     }),
-
-    /*
-    imageModalOpen() {
-      return this.$store.state.imageModal.open;
-    },
-
-    infoVisible() {
-      return this.$store.state.info.visible;
-    },
-
-    layerPickerVisible() {
-      return this.$store.state.layerPicker.visible;
-    },
-    */
   },
 
   methods: {
@@ -78,15 +54,20 @@ main {
 }
 
 .content {
+  --border-width: 8px;
+
   background: white;
-  padding: 1rem;
+  border-left: var(--border-width) solid var(--color-dark-gray);
+  border-bottom: var(--border-width) solid var(--color-dark-gray);
+  padding: 3rem;
+  padding-left: 2rem;
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0;
+  right: 0;
   z-index: 1000;
-  max-height: calc(100vh - 2rem);
+  max-height: 100vh;
   overflow-y: auto;
-  width: 50%;
+  min-width: 10%;
 }
 </style>
 
@@ -113,5 +94,18 @@ body {
 
 .content h2 {
   margin: 0;
+  text-transform: uppercase;
+}
+
+.page-wide {
+  width: 60vw;
+}
+
+.page-medium {
+  width: 40vw;
+}
+
+.page-narrow {
+  width: 20vw;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-medium">
     <h2>Oral History Projects</h2>
     <div>
       <ul>

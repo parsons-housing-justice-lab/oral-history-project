@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-wide">
     <h2>{{ interview.Name }}</h2>
 
     <div class="fields">

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-wide">
     <h2>Oral History Projects</h2>
     <h3>{{ project.Name }}</h3>
     <div>{{ project.Description }}</div>

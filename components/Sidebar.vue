@@ -1,7 +1,9 @@
 <template>
   <div class="sidebar">
     <SidebarSection class="top-section">
-      <OhpLogo />
+      <NuxtLink to="/" class="home-link">
+        <OhpLogo />
+      </NuxtLink>
       <div class="top-section-content">
         <SidebarMenu />
       </div>
@@ -31,10 +33,9 @@ export default {
   z-index: 1000;
 }
 
-h1 {
-  font-family: var(--title-font-family);
-  margin: 0;
-  margin-bottom: 1em;
+.home-link {
+  display: inline-block;
+  width: 100%;
 }
 
 .top-section-content > * {
