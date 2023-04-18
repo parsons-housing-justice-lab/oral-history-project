@@ -1,39 +1,21 @@
 <template>
   <div class="sidebar">
     <SidebarSection class="top-section">
-      <h1>{{title}}</h1>
+      <OhpLogo />
       <div class="top-section-content">
         <SidebarMenu />
-        <!--
-        <SectorPicker /> 
-        <Search />
-        -->
       </div>
-    </SidebarSection>
-
-    <SidebarSection v-if="selectedFeatures.length" class="popup-wrapper">
-    <!--
-      <Popup :feature="selectedFeatures[0]" />
-    -->
     </SidebarSection>
   </div>
 </template>
 
 <script>
-import { mapState } from 'pinia';
-import { useTextBlocksStore } from '@/store/textBlocks';
+import OhpLogo from '@/assets/img/ohp-logo.svg';
 
 export default {
-  computed: {
-    ...mapState(useTextBlocksStore, {
-      title: store => store.byType('Title')[0],
-    }),
+  components: { OhpLogo },
 
-    selectedFeatures() {
-      // TODO pinia
-      return [];
-      // return this.$store.state.popup.selectedFeatures;
-    },
+  computed: {
   },
 }
 </script>
@@ -43,12 +25,10 @@ export default {
 @custom-media --mobile (max-width: 500px);
 
 .sidebar {
-  border-radius: 20px;
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  top: 0;
+  left: 0;
   z-index: 1000;
-  width: 25%;
 }
 
 h1 {
@@ -58,38 +38,25 @@ h1 {
 }
 
 .top-section-content > * {
-  margin-bottom: 1em;
-}
-
-.top-section-content > *:last-of-type {
-  margin-bottom: 0;
-}
-
-.popup-wrapper {
-  margin-top: 0.5em;
+  margin: 1em 0;
 }
 
 .top-section {
   align-items: flex-start;
+  background: var(--color-dark-gray);
   display: flex;
   flex-direction: column;
 }
 
 @media (--mobile) {
-  .sidebar {
-    left: 0.5rem;
-    right: 0.5rem;
-    top: 0.5rem;
-    width: unset;
-  }
-
-  h1 {
-    margin-bottom: 0;
-  }
 }
 </style>
 
 <style>
+.sidebar .top-section svg path {
+  fill: white;
+}
+
 @media (--mobile) {
   .sidebar .sector-picker {
     display: none;

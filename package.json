@@ -22,6 +22,7 @@
     "@pinia/nuxt": "^0.4.7",
     "airtable": "^0.11.6",
     "mapbox-gl": "^2.13.0",
-    "pinia": "^2.0.33"
+    "pinia": "^2.0.33",
+    "vite-svg-loader": "^4.0.0"
   }
 }

@@ -1,6 +1,14 @@
+import svgLoader from 'vite-svg-loader';
+
 export default defineNuxtConfig({
   app: {
     baseURL: '/oral-history-project/',
+  },
+
+  vite: {
+    plugins: [
+      svgLoader(),
+    ],
   },
 
   generate: {

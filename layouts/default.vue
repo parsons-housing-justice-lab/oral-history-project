@@ -98,6 +98,8 @@ html {
 
   --main-font-family: 'Noto Sans', sans-serif;
   --title-font-family: 'Open Sans', sans-serif;
+
+  --color-dark-gray: #231F20;
 }
 
 *, *:before, *:after {

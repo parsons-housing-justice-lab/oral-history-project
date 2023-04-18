@@ -34,6 +34,7 @@ export default {
 .sidebar-menu ol {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -42,8 +43,9 @@ export default {
 
 <style>
 .sidebar-menu a {
-  color: black;
+  color: white;
   font-weight: bold;
   text-decoration: none;
+  text-transform: uppercase;
 }
 </style>
