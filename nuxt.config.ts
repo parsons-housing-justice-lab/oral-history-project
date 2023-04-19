@@ -15,12 +15,9 @@ export default defineNuxtConfig({
     fallback: true,
   },
 
-  buildModules: [
-    '@nuxtjs/google-fonts',
-  ],
-
   modules: [
     '@pinia/nuxt',
+    '@nuxtjs/google-fonts',
   ],
 
   postcss: {
@@ -33,7 +30,7 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       'Noto+Sans': [400, 700],
-      'Open+Sans': [400, 500, 700],
+      'PT+Sans': [400, 700],
     },
   },
 })

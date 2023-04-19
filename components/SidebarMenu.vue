@@ -44,6 +44,7 @@ export default {
 <style>
 .sidebar-menu a {
   color: white;
+  font-family: var(--title-font-family);
   font-weight: bold;
   text-decoration: none;
   text-transform: uppercase;

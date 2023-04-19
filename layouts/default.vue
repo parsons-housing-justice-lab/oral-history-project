@@ -78,7 +78,7 @@ html {
   box-sizing: border-box;
 
   --main-font-family: 'Noto Sans', sans-serif;
-  --title-font-family: 'Open Sans', sans-serif;
+  --title-font-family: 'PT Sans', sans-serif;
 
   --color-dark-gray: #231F20;
 }
@@ -90,6 +90,10 @@ html {
 body {
   font-family: var(--main-font-family);
   margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--title-font-family);
 }
 
 .content h2 {
