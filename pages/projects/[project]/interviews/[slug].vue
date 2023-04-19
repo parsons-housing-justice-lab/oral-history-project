@@ -1,5 +1,5 @@
 <template>
-  <div class="page-wide">
+  <div class="interview-page page-wide">
     <h2>{{ interview.Name }}</h2>
 
     <div class="fields">
@@ -173,5 +173,16 @@ export default {
 .index {
   background: #F1F0F0;
   padding: 1rem;
+}
+</style>
+
+<style>
+.interview-page .index th {
+  display: none;
+}
+
+.interview-page .index td {
+  vertical-align: top;
+  padding: 0.5rem;
 }
 </style>
