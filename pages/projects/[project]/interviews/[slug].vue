@@ -4,27 +4,27 @@
 
     <div class="fields">
       <div class="row">
-        <div class="field">
-          <div class="field-label">Collection</div>
-          <div class="field-value">{{ project.Name }}</div>
+        <div v-if="interview.Photo" class="column">
+          <!-- TODO get more robustly -->
+          <img class="photo" :src="interview.Photo[0].url" />
         </div>
-      </div>
-      <div class="row">
-        <div class="field">
-          <div class="field-label">Interviewer</div>
-          <div class="field-value">{{ interview.Interviewer }}</div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="field">
-          <div class="field-label">Date</div>
-          <div class="field-value">{{ interview.Date }}</div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="field">
-          <div class="field-label">Language</div>
-          <div class="field-value">{{ interview.Language }}</div>
+        <div class="column">
+          <div class="field">
+            <div class="field-label">Collection</div>
+            <div class="field-value">{{ project.Name }}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Interviewer</div>
+            <div class="field-value">{{ interview.Interviewer }}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Date</div>
+            <div class="field-value">{{ interview.Date }}</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Language</div>
+            <div class="field-value">{{ interview.Language }}</div>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -159,7 +159,13 @@ export default {
 }
 
 .field-label {
+  font-family: var(--title-font-family);
+  font-weight: bold;
   text-transform: uppercase;
+}
+
+.photo {
+  max-width: 300px;
 }
 
 .description-column-left {
