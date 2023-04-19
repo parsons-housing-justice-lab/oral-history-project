@@ -1,1 +1,0 @@
-import{a as e,b as o,o as t,e as s}from"./entry.f8a310bf.js";const a={},c={class:"page-wide"},n=s("h2",null,"About",-1),_=[n];function r(d,i,p,l,u,f){return t(),o("div",c,_)}const m=e(a,[["render",r]]);export{m as default};

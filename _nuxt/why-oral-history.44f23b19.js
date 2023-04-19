@@ -1,0 +1,1 @@
+import{a as e,b as s,o,e as t}from"./entry.ea2e780f.js";const a={},c={class:"page-wide"},r=t("h2",null,"Why Oral History?",-1),n=[r];function _(i,d,l,p,h,f){return o(),s("div",c,n)}const m=e(a,[["render",_]]);export{m as default};

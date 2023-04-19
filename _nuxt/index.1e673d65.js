@@ -1,0 +1,1 @@
+import{a as e,b as o,o as t,e as n}from"./entry.ea2e780f.js";const s={name:"IndexPage"},a=n("h2",null,"Welcome!",-1),c=[a];function r(_,d,l,i,p,f){return t(),o("div",null,c)}const u=e(s,[["render",r]]);export{u as default};
