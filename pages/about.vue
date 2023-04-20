@@ -1,13 +1,6 @@
 <template>
-  <div class="page-wide">
-    <h2>About</h2>
-  </div>
+  <ContentPage name="About" />
 </template>
 
-<script>
-export default {
-}
+<script setup>
 </script>
-
-<style scoped>
-</style>

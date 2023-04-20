@@ -3,6 +3,8 @@ import {
   AIRTABLE_API_KEY,
   AIRTABLE_DATABASE_ID,
   AIRTABLE_INTERVIEWS_TABLE,
+  AIRTABLE_PAGES_TABLE,
+  AIRTABLE_PAGE_SECTIONS_TABLE,
   AIRTABLE_PROJECTS_TABLE,
   AIRTABLE_TEXT_BLOCKS_TABLE,
 } from "@/constants";
@@ -16,7 +18,6 @@ const getRecords = async (table, progressCallback) => {
     base(table).select({ maxRecords: 2500 })
       .eachPage(
         (records, fetchNextPage) => {
-          console.log(records);
           const recordsBatch = records.map(r => ({
             ...r.fields,
             id: r.id,
@@ -38,6 +39,15 @@ const getRecords = async (table, progressCallback) => {
 export const getInterviews = async () => {
   // TODO only published
   return await getRecords(AIRTABLE_INTERVIEWS_TABLE);
+};
+
+export const getPages = async () => {
+  return await getRecords(AIRTABLE_PAGES_TABLE);
+};
+
+export const getPageSections = async () => {
+  // TODO only published
+  return await getRecords(AIRTABLE_PAGE_SECTIONS_TABLE);
 };
 
 export const getProjects = async () => {

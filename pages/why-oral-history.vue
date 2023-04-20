@@ -1,13 +1,6 @@
 <template>
-  <div class="page-wide">
-    <h2>Why Oral History?</h2>
-  </div>
+  <ContentPage name="Why Oral History?" />
 </template>
 
-<script>
-export default {
-}
+<script setup>
 </script>
-
-<style scoped>
-</style>

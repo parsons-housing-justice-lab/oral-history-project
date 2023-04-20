@@ -1,6 +1,8 @@
 export const AIRTABLE_API_KEY = 'patm1XVqcrZZnJI9u.47fdb5e6df590b023b166780826a5894ec5743c0efb01d16d4c2d03e89dd0301';
 export const AIRTABLE_DATABASE_ID = 'appKHAsfUIM3AqEy6';
 export const AIRTABLE_INTERVIEWS_TABLE = 'interviews';
+export const AIRTABLE_PAGES_TABLE = 'pages';
+export const AIRTABLE_PAGE_SECTIONS_TABLE = 'page sections';
 export const AIRTABLE_PROJECTS_TABLE = 'projects';
 export const AIRTABLE_TEXT_BLOCKS_TABLE = 'text blocks';
 

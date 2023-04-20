@@ -19,12 +19,14 @@
 <script>
 import { mapActions, mapState } from 'pinia';
 import { useTextBlocksStore } from '@/store/textBlocks';
+import { usePagesStore } from '@/store/pages';
 
 export default {
   name: 'IndexPage',
 
   async mounted() {
     this.loadTextBlocks();
+    this.loadPages();
     /*
     const params = this.$route.query;
     this.$store.dispatch('map/loadQueryParams', { params });
@@ -39,9 +41,8 @@ export default {
   },
 
   methods: {
-    ...mapActions(useTextBlocksStore, [
-      'loadTextBlocks',
-    ]),
+    ...mapActions(useTextBlocksStore, ['loadTextBlocks']),
+    ...mapActions(usePagesStore, ['loadPages']),
   },
 }
 </script>
@@ -94,11 +95,11 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--title-font-family);
+  text-transform: uppercase;
 }
 
 .content h2 {
   margin: 0;
-  text-transform: uppercase;
 }
 
 .page-wide {
