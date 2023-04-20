@@ -1,0 +1,1 @@
+import{l as s}from"./entry.2d5b930d.js";import{a as o}from"./airtable.6a4bc23a.js";const i=s("projects",{state:()=>({projects:[]}),getters:{byId:t=>e=>t.projects.filter(({Id:r})=>""+r===e),bySlug:t=>e=>t.projects.filter(({Slug:r})=>r===e)},actions:{async loadProjects(){this.projects.length>0||(this.projects=await o())}}});export{i as u};

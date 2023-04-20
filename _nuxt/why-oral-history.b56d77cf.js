@@ -1,0 +1,1 @@
+import{_ as r}from"./ContentPage.00c7ae93.js";import{a as t,c,o as e}from"./entry.2d5b930d.js";import"./pages.84d24879.js";import"./airtable.6a4bc23a.js";const n={};function a(s,_){const o=r;return e(),c(o,{name:"Why Oral History?"})}const l=t(n,[["render",a]]);export{l as default};

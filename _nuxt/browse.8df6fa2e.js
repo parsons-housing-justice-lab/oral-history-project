@@ -1,1 +1,0 @@
-import{a as e,b as o,o as s,e as t}from"./entry.ea2e780f.js";const c={},n=t("h2",null,"Browse",-1),r=[n];function a(_,d,l,p,i,f){return s(),o("div",null,r)}const h=e(c,[["render",a]]);export{h as default};

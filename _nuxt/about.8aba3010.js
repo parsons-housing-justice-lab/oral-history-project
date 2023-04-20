@@ -1,0 +1,1 @@
+import{_ as t}from"./ContentPage.00c7ae93.js";import{a as c,c as e,o as n}from"./entry.2d5b930d.js";import"./pages.84d24879.js";import"./airtable.6a4bc23a.js";const r={};function a(_,s){const o=t;return n(),e(o,{name:"About"})}const u=c(r,[["render",a]]);export{u as default};
