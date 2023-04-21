@@ -11,7 +11,7 @@
         <NuxtLink to="/projects">Oral History Projects</NuxtLink>
       </li>
       <li>
-        <NuxtLink to="/browse">Browse</NuxtLink>
+        <NuxtLink to="/using-this-platform">Using this Platform</NuxtLink>
       </li>
       <li>
         <NuxtLink to="/get-involved">Get Involved</NuxtLink>
