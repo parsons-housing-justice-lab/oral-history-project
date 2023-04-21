@@ -20,16 +20,11 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'pinia';
+import { mapState } from 'pinia';
 import { useInterviewsStore } from '@/store/interviews';
 import { useProjectsStore } from '@/store/projects';
 
 export default {
-  async mounted() {
-    await this.loadProjects();
-    await this.loadInterviews();
-  },
-
   computed: {
     ...mapState(useProjectsStore, {
       projectBySlug: 'bySlug',
@@ -46,16 +41,6 @@ export default {
     project() {
       return this.projectBySlug(this.$route.params.slug)?.[0] ?? {};
     },
-  },
-
-  methods: {
-    ...mapActions(useInterviewsStore, [
-      'loadInterviews',
-    ]),
-
-    ...mapActions(useProjectsStore, [
-      'loadProjects',
-    ]),
   },
 }
 </script>

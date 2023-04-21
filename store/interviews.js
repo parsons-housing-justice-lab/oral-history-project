@@ -21,7 +21,6 @@ export const useInterviewsStore = defineStore('interviews', {
     async loadInterviews() {
       if (this.interviews.length > 0) return;
       this.interviews = await getInterviews();
-      console.log(this.interviews);
     },
   },
 });

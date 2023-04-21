@@ -20,6 +20,8 @@
 import { mapActions, mapState } from 'pinia';
 import { useTextBlocksStore } from '@/store/textBlocks';
 import { usePagesStore } from '@/store/pages';
+import { useInterviewsStore } from '@/store/interviews';
+import { useProjectsStore } from '@/store/projects';
 
 export default {
   name: 'IndexPage',
@@ -27,6 +29,8 @@ export default {
   async mounted() {
     this.loadTextBlocks();
     this.loadPages();
+    this.loadProjects();
+    this.loadInterviews();
     /*
     const params = this.$route.query;
     this.$store.dispatch('map/loadQueryParams', { params });
@@ -43,6 +47,8 @@ export default {
   methods: {
     ...mapActions(useTextBlocksStore, ['loadTextBlocks']),
     ...mapActions(usePagesStore, ['loadPages']),
+    ...mapActions(useInterviewsStore, ['loadInterviews']),
+    ...mapActions(useProjectsStore, ['loadProjects']),
   },
 }
 </script>

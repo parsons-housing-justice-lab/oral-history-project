@@ -90,12 +90,7 @@ import { useProjectsStore } from '@/store/projects';
 
 export default {
   async mounted() {
-    await this.loadProjects();
-    await this.loadInterviews();
   },
-
-  /*
-  */
 
   computed: {
     ...mapState(useProjectsStore, {
@@ -113,16 +108,6 @@ export default {
     project() {
       return this.projectBySlug(this.$route.params.project)?.[0] ?? {};
     },
-  },
-
-  methods: {
-    ...mapActions(useInterviewsStore, [
-      'loadInterviews',
-    ]),
-
-    ...mapActions(useProjectsStore, [
-      'loadProjects',
-    ]),
   },
 }
 </script>
