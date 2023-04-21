@@ -1,0 +1,40 @@
+@custom-media --mobile (max-width: 500px);
+
+html {
+  box-sizing: border-box;
+
+  --main-font-family: 'Noto Sans', sans-serif;
+  --title-font-family: 'PT Sans', sans-serif;
+
+  --color-dark-gray: #231F20;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: var(--main-font-family);
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--title-font-family);
+  text-transform: uppercase;
+}
+
+.content h2 {
+  margin: 0;
+}
+
+.page-wide {
+  width: 60vw;
+}
+
+.page-medium {
+  width: 40vw;
+}
+
+.page-narrow {
+  width: 20vw;
+}

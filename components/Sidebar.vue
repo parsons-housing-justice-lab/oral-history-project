@@ -23,9 +23,6 @@ export default {
 </script>
 
 <style scoped>
-/* TODO make this less repetitive */
-@custom-media --mobile (max-width: 500px);
-
 .sidebar {
   position: absolute;
   top: 0;

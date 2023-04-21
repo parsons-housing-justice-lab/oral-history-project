@@ -27,6 +27,8 @@ export default defineNuxtConfig({
     },
   },
 
+  css: ['~/assets/css/main.css'],
+
   googleFonts: {
     families: {
       'Noto+Sans': [400, 700],
