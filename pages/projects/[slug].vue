@@ -1,7 +1,23 @@
 <template>
   <div class="page-wide">
-    <h2>Oral History Projects</h2>
-    <h3>{{ project.Name }}</h3>
+    <h2>{{ project.Name }}</h2>
+
+    <div class="short-fields">
+      <div class="short-field" v-if="project.Keywords?.length ?? false">
+        <span class="label">Keywords:</span>
+        <span class="value">{{ project.Keywords.join(', ') }}</span>
+      </div>
+      <div class="short-field" v-if="project.Contact">
+        <span class="label">Contact:</span>
+        <span class="value">{{ project.Contact }}</span>
+      </div>
+      <div class="short-field" v-if="project.Site">
+        <span class="label">Site:</span>
+        <span class="value">
+          <a href="project.Site">{{ project.Site }}</a>
+        </span>
+      </div>
+    </div>
     <div>{{ project.Description }}</div>
     <div>
       Interviews:
@@ -46,4 +62,20 @@ export default {
 </script>
 
 <style scoped>
+.short-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.short-field {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.label {
+  font-weight: bold;
+}
 </style>
