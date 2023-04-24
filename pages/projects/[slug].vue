@@ -2,6 +2,8 @@
   <div class="page-wide">
     <h2>{{ project.Name }}</h2>
 
+    <!-- TODO add more fields/sections -->
+
     <div class="short-fields">
       <div class="short-field" v-if="project.Keywords?.length ?? false">
         <span class="label">Keywords:</span>
