@@ -29,8 +29,14 @@
       </div>
       <div class="row">
         <div class="field description-column-left">
-          <div class="field-label">Interview Description</div>
-          <div class="field-value" v-html="$mdRenderer.render(interview.Description || '')" />
+          <div>
+            <div class="field-label">Biography</div>
+            <div class="field-value" v-html="$mdRenderer.render(interview.Biography || '')" />
+          </div>
+          <div>
+            <div class="field-label">Interview Description</div>
+            <div class="field-value" v-html="$mdRenderer.render(interview.Description || '')" />
+          </div>
         </div>
         <div class="column description-column-right">
           <div class="field">
