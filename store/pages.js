@@ -16,12 +16,14 @@ export const usePagesStore = defineStore('pages', {
       const pages = await getPages();
       const pageSections = await getPageSections();
 
-      this.pages = pages.map(page => ({
-        ...page,
-        sections: page['page sections']
-          ?.map(pageSection => pageSections.find(p => p.id === pageSection))
-          ?? [],
-      }));
+      this.pages = pages.map(page => {
+        const sections = (
+          page['page sections']
+            ?.map(pageSection => pageSections.find(p => p.id === pageSection))
+            ?? []
+        ).sort((a, b) => a.Order - b.Order);
+        return { ...page, sections };
+      });
     },
   },
 });
