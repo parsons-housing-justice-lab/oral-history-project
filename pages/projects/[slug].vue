@@ -2,8 +2,6 @@
   <div class="page-wide">
     <h2>{{ project.Name }}</h2>
 
-    <!-- TODO add more fields/sections -->
-
     <div class="short-fields">
       <div class="short-field" v-if="project.Keywords?.length ?? false">
         <span class="label">Keywords:</span>
@@ -20,20 +18,41 @@
         </span>
       </div>
     </div>
-    <div>{{ project.Description }}</div>
-    <div>
-      Interviews:
-      <ul>
-        <li
-          v-for="interview in interviews"
-          :key="interview.Slug"
-        >
-          <NuxtLink :to="`/projects/${project.Slug}/interviews/${interview.Slug}`">
-            {{ interview.Name }}
-          </NuxtLink>
-        </li>
-      </ul>
-    </div>
+    <FieldColumn>
+      <Field label="About">
+        <RichText class="field-value" :text="project.About" />
+      </Field>
+      <Field label="Project Goals and Methods">
+        <RichText class="field-value" :text="project.Goals" />
+      </Field>
+      <Field label="Team and Collaborators">
+        <RichText class="field-value" :text="project.Team" />
+      </Field>
+      <Field label="Oral History Interviews">
+        <ul class="plain-list">
+          <li
+            v-for="interview in interviews"
+            :key="interview.Slug"
+          >
+            <NuxtLink :to="`/projects/${project.Slug}/interviews/${interview.Slug}`">
+              {{ interview.Name }}
+            </NuxtLink>
+          </li>
+        </ul>
+      </Field>
+      <Field label="Overarching Themes">
+        <ul class="plain-list">
+          <li
+            v-for="theme in project.Themes"
+            :key="theme"
+          >
+            {{ theme }}
+          </li>
+        </ul>
+      </Field>
+    </FieldColumn>
+
+    <!-- TODO add other custom sections -->
   </div>
 </template>
 
@@ -79,5 +98,11 @@ export default {
 
 .label {
   font-weight: bold;
+}
+
+.plain-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 </style>

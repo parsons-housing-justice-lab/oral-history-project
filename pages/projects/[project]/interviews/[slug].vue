@@ -8,53 +8,44 @@
           <!-- TODO get more robustly -->
           <img class="photo" :src="interview.Photo[0].url" />
         </div>
-        <div class="column">
-          <div class="field">
-            <div class="field-label">Collection</div>
-            <div class="field-value">{{ project.Name }}</div>
-          </div>
-          <div class="field">
-            <div class="field-label">Interviewer</div>
-            <div class="field-value">{{ interview.Interviewer }}</div>
-          </div>
-          <div class="field">
-            <div class="field-label">Date</div>
-            <div class="field-value">{{ interview.Date }}</div>
-          </div>
-          <div class="field">
-            <div class="field-label">Language</div>
-            <div class="field-value">{{ interview.Language }}</div>
-          </div>
-        </div>
+        <FieldColumn class="tight-column">
+          <Field label="Collection">
+            {{ project.Name }}
+          </Field>
+          <Field label="Interviewer">
+            {{ interview.Interviewer }}
+          </Field>
+          <Field label="Date">
+            {{ interview.Date }}
+          </Field>
+          <Field label="Language">
+            {{ interview.Language }}
+          </Field>
+        </FieldColumn>
       </div>
       <div class="row">
-        <div class="field description-column-left">
-          <div>
-            <div class="field-label">Biography</div>
-            <div class="field-value" v-html="$mdRenderer.render(interview.Biography || '')" />
-          </div>
-          <div>
-            <div class="field-label">Interview Description</div>
-            <div class="field-value" v-html="$mdRenderer.render(interview.Description || '')" />
-          </div>
-        </div>
-        <div class="column description-column-right">
-          <div class="field">
-            <div class="field-label">People</div>
-            <div class="field-value" v-html="$mdRenderer.render(interview.People || '')" />
-          </div>
-          <div class="field">
-            <div class="field-label">Topics</div>
-            <div class="field-value" v-html="$mdRenderer.render(interview.Topics || '')" />
-          </div>
-          <div class="field">
-            <div class="field-label">Places</div>
-            <div class="field-value" v-html="$mdRenderer.render(interview.Places || '')" />
-          </div>
-        </div>
+        <FieldColumn class="description-column-left">
+          <Field label="Biography">
+            <RichText :text="interview.Biography" />
+          </Field>
+          <Field label="Interview Description">
+            <RichText :text="interview.Description" />
+          </Field>
+        </FieldColumn>
+        <FieldColumn class="description-column-right">
+          <Field label="People">
+            <RichText :text="interview.People" />
+          </Field>
+          <Field label="Topics">
+            <RichText :text="interview.Topics" />
+          </Field>
+          <Field label="Places">
+            <RichText :text="interview.Places" />
+          </Field>
+        </FieldColumn>
       </div>
-      <div class="row">
-        <div class="field">
+      <FieldColumn>
+        <Field>
           <iframe
             width="100%"
             height="100"
@@ -63,28 +54,17 @@
             allow="autoplay"
             :src="interview['Audio Link']"
           ></iframe>
-        </div>
-      </div>
-      <div class="row">
-        <div class="field">
-          <div class="field-label">Index</div>
-          <div class="field-value index" v-html="$mdRenderer.render(interview.Index || '')" />
-        </div>
-      </div>
-      <div class="row">
-        <div class="field">
-          <div class="field-label">Transcription</div>
-          <div class="field-value"
-            v-html="$mdRenderer.render(interview.Transcription || '')" />
-        </div>
-      </div>
-      <div class="row">
-        <div class="field">
-          <div class="field-label">Citation</div>
-          <div class="field-value"
-            v-html="$mdRenderer.render(interview.Citation || '')" />
-        </div>
-      </div>
+        </Field>
+        <Field label="Index">
+          <RichText class="index" :text="interview.Index" />
+        </Field>
+        <Field label="Transcription">
+          <RichText :text="interview.Transcription" />
+        </Field>
+        <Field label="Citation">
+          <RichText :text="interview.Citation" />
+        </Field>
+      </FieldColumn>
     </div>
   </div>
 </template>
@@ -143,18 +123,6 @@ export default {
   gap: 1rem;
 }
 
-.field {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.field-label {
-  font-family: var(--title-font-family);
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
 .photo {
   max-width: 300px;
 }
@@ -165,6 +133,14 @@ export default {
 
 .description-column-right {
   width: 33%
+}
+
+.tight-column {
+  gap: 1.5rem;
+}
+
+.tight-column .field {
+  gap: 0.25rem;
 }
 
 .index {
