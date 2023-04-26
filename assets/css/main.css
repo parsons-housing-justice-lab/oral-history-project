@@ -27,6 +27,10 @@ h2 {
   font-size: 2em;
 }
 
+button {
+  font-family: var(--main-font-family);
+}
+
 .content h2 {
   margin: 0;
 }

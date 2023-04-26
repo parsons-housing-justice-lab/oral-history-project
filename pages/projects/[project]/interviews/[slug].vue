@@ -59,7 +59,9 @@
           <RichText class="index" :text="interview.Index" />
         </Field>
         <Field label="Transcription">
-          <RichText :text="interview.Transcription" />
+          <CollapsibleSection initial-height="10em">
+            <RichText :text="interview.Transcription" />
+          </CollapsibleSection>
         </Field>
         <Field label="Citation">
           <RichText :text="interview.Citation" />
