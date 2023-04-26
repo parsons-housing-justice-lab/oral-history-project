@@ -14,7 +14,7 @@
       <div class="short-field" v-if="project.Site">
         <span class="label">Site:</span>
         <span class="value">
-          <a href="project.Site">{{ project.Site }}</a>
+          <a :href="project.Site">{{ project.Site }}</a>
         </span>
       </div>
     </div>

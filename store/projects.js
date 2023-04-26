@@ -17,7 +17,14 @@ export const useProjectsStore = defineStore('projects', {
   actions: {
     async loadProjects() {
       if (this.projects.length > 0) return;
-      this.projects = await getProjects();
+      let projects = await getProjects();
+
+      projects = projects.map(p => ({
+        ...p,
+        Site: p.Site.startsWith('http') ? p.Site : `https://${p.Site}`,
+      }));
+
+      this.projects = projects;
     },
   },
 });
