@@ -55,12 +55,12 @@
             :src="interview['Audio Link']"
           ></iframe>
         </Field>
-        <Field label="Index">
-          <RichText class="index" :text="interview.Index" />
+        <Field class="index" label="Index">
+          <RichText :text="interview.Index" />
         </Field>
         <Field label="Transcription">
-          <CollapsibleSection initial-height="10em">
-            <RichText :text="interview.Transcription" />
+          <CollapsibleSection initial-height="10.5em">
+            <TranscriptionSection :transcription="interview.Transcription" />
           </CollapsibleSection>
         </Field>
         <Field label="Citation">
