@@ -19,6 +19,5 @@ const formatTime = time => time.replaceAll('[', '').replaceAll(']', '');
 .time-code-transcription {
   display: grid;
   grid-template-columns: 75px auto;
-  row-gap: 1rem;
 }
 </style>
