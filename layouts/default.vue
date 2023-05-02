@@ -10,7 +10,12 @@
 
     <Sidebar />
 
-    <div class="content">
+    <div class="content" v-if="showContent">
+      <div
+        class="welcome-close"
+        v-if="showWelcomeClose"
+        @click="welcomeHidden = true"
+      >&times;</div>
       <slot />
     </div>
   </main>
@@ -25,6 +30,12 @@ import { useProjectsStore } from '@/store/projects';
 
 export default {
   name: 'IndexPage',
+
+  data() {
+    return {
+      welcomeHidden: false,
+    };
+  },
 
   async mounted() {
     this.loadTextBlocks();
@@ -42,6 +53,14 @@ export default {
     ...mapState(useTextBlocksStore, {
       title: store => store.byType('Title')[0],
     }),
+
+    showContent() {
+      return !this.welcomeHidden || this.$route.path !== '/';
+    },
+
+    showWelcomeClose() {
+      return this.$route.path === '/';
+    },
   },
 
   methods: {
@@ -75,5 +94,16 @@ main {
   max-height: 100vh;
   overflow-y: auto;
   min-width: 10%;
+}
+
+.welcome-close {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  font-size: 2.5rem;
+  line-height: 2rem;
+  margin-top: -2.5rem;
+  margin-right: -2.5rem;
+  justify-content: flex-end;
 }
 </style>

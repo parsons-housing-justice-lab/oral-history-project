@@ -1,6 +1,8 @@
 <template>
-  <div>
+  <div class="page-narrow welcome-text">
     <h2>Welcome!</h2>
+
+    <PageSections name="Welcome" />
   </div>
 </template>
 
@@ -10,4 +12,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.welcome-text h2 {
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+</style>
