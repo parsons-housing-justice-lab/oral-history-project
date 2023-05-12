@@ -2,22 +2,6 @@
   <div class="page-wide">
     <h2>{{ project.Name }}</h2>
 
-    <div class="short-fields">
-      <div class="short-field" v-if="project.Keywords?.length ?? false">
-        <span class="label">Keywords:</span>
-        <span class="value">{{ project.Keywords.join(', ') }}</span>
-      </div>
-      <div class="short-field" v-if="project.Contact">
-        <span class="label">Contact:</span>
-        <span class="value">{{ project.Contact }}</span>
-      </div>
-      <div class="short-field" v-if="project.Site">
-        <span class="label">Site:</span>
-        <span class="value">
-          <a :href="project.Site">{{ project.Site }}</a>
-        </span>
-      </div>
-    </div>
     <FieldColumn>
       <Field label="About">
         <RichText class="field-value" :text="project.About" />
@@ -49,6 +33,24 @@
             {{ theme }}
           </li>
         </ul>
+      </Field>
+      <Field label="Connect">
+        <div class="short-fields">
+          <div class="short-field" v-if="project.Keywords?.length ?? false">
+            <span class="label">Keywords:</span>
+            <span class="value">{{ project.Keywords.join(', ') }}</span>
+          </div>
+          <div class="short-field" v-if="project.Contact">
+            <span class="label">Contact:</span>
+            <span class="value">{{ project.Contact }}</span>
+          </div>
+          <div class="short-field" v-if="project.Site">
+            <span class="label">Site:</span>
+            <span class="value">
+              <a :href="project.Site">{{ project.Site }}</a>
+            </span>
+          </div>
+        </div>
       </Field>
     </FieldColumn>
 
