@@ -8,13 +8,13 @@ export const toGeoJson = locations => {
 export const toGeoJsonFeature = location => {
   return {
     type: "Feature",
-    id: location.ID,
+    id: location.Id,
     properties: { ...location },
     geometry: {
       type: "Point",
       coordinates: [
-        location.lon,
-        location.lat
+        location.Longitude,
+        location.Latitude
       ]
     }
   };

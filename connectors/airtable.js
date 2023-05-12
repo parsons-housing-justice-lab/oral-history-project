@@ -2,6 +2,7 @@ import Airtable from "airtable";
 import {
   AIRTABLE_API_KEY,
   AIRTABLE_DATABASE_ID,
+  AIRTABLE_LOCATIONS_TABLE,
   AIRTABLE_INTERVIEWS_TABLE,
   AIRTABLE_PAGES_TABLE,
   AIRTABLE_PAGE_SECTIONS_TABLE,
@@ -34,6 +35,11 @@ const getRecords = async (table, progressCallback) => {
         }
       );
   });
+};
+
+export const getLocations = async () => {
+  // TODO only published
+  return await getRecords(AIRTABLE_LOCATIONS_TABLE);
 };
 
 export const getInterviews = async () => {

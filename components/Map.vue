@@ -13,7 +13,7 @@ import {
   MAPBOX_STYLE,
   MAXIMUM_EXTENT,
 } from "@/constants";
-import { useDataStore } from '@/store/data';
+import { useLocationsStore } from '@/store/locations';
 import { useMapStore } from '@/store/map';
 
 export default {
@@ -36,27 +36,28 @@ export default {
 
   computed: {
     ...mapStores(useMapStore),
-    ...mapState(useDataStore, ['locationsGeoJson']),
+    ...mapState(useLocationsStore, ['locationsGeoJson']),
 
     locationsLayer() {
       return {
         id: 'locations',
         type: 'symbol',
+        source: 'locations-source',
         layout: {
           'icon-allow-overlap': true,
-          'icon-image': ['concat', 'marker_', ['get', 'sectorSlug']],
+          'icon-image': 'CLT-Coop-MHA',
           'icon-size': [
             'interpolate', ['linear'], ['zoom'],
             12, 0.5,
             16, 1.5,
           ]
         },
-        filter: this.sectorFilter,
       };
     },
 
     locationsSource() {
       return {
+        type: 'geojson',
         data: this.locationsGeoJson,
       };
     },
@@ -65,26 +66,6 @@ export default {
       // TODO pinia
       return [];
       // return this.$store.getters['map/highlightedFeatures'];
-    },
-
-    selectedSectors() {
-      // return this.$store.state.filters.sectors;
-      // TODO pinia
-      return [];
-    },
-
-    sectorFilter() {
-      // Since the Sector property is an array, loop over selected sectors to
-      // make a series of conditions
-      return ["any",
-        ...this.selectedSectors.map(sector => (
-          [
-            "in",
-            sector,
-            ["get", "Sector"]
-          ]
-        ))
-      ];
     },
 
     storeCenter() {
@@ -127,19 +108,48 @@ export default {
         projection: 'naturalEarth',
       });
 
-      // TODO add features
-
       map.on('load', this.mapLoaded);
       map.on('click', this.handleClick);
       map.on('move', this.handleMove);
       map.on('moveend', this.handleMoveEnd);
     },
 
-    mapLoaded(e) {
+    addLocationsSource() {
+      // TODO detect existing and overwrite
+      this.map.addSource('locations-source', this.locationsSource);
+    },
+
+    addLocationsLayer() {
+      // TODO detect existing and overwrite
+      this.map.addLayer(this.locationsLayer);
+    },
+
+    async mapLoaded(e) {
       this.map = e.target;
       this.map.jumpTo({
         center: this.storeCenter,
         zoom: this.storeZoom
+      });
+
+
+      this.addLocationsSource();
+
+      await this.loadIcons();
+      this.addLocationsLayer();
+    },
+
+    loadIcons() {
+      // TODO better way to reference subdir
+      // TODO async / return promise
+      // TODO add other icons
+      this.map.loadImage('/oral-history-project/map-icons/CLT.png', (error, image) => {
+        if (error) throw error;
+        if (!this.map.hasImage('CLT')) this.map.addImage('CLT', image);
+      });
+
+      this.map.loadImage('/oral-history-project/map-icons/CLT-Coop-MHA.png', (error, image) => {
+        if (error) throw error;
+        if (!this.map.hasImage('CLT')) this.map.addImage('CLT-Coop-MHA', image);
       });
     },
 
@@ -225,12 +235,6 @@ export default {
 
     selectedLayers() {
       this.showSelectedLayers();
-    },
-
-    sectorFilter() {
-      if (this.map) {
-        this.map.setFilter(this.locationsLayer.id, this.sectorFilter);
-      }
     },
 
     highlightedFeatures(currentValue, previousValue) {

@@ -23,6 +23,7 @@
 
 <script>
 import { mapActions, mapState } from 'pinia';
+import { useLocationsStore } from '@/store/locations';
 import { useTextBlocksStore } from '@/store/textBlocks';
 import { usePagesStore } from '@/store/pages';
 import { useInterviewsStore } from '@/store/interviews';
@@ -38,6 +39,7 @@ export default {
   },
 
   async mounted() {
+    this.loadLocations();
     this.loadTextBlocks();
     this.loadPages();
     this.loadProjects();
@@ -45,7 +47,6 @@ export default {
     /*
     const params = this.$route.query;
     this.$store.dispatch('map/loadQueryParams', { params });
-    this.$store.dispatch('data/loadLocations', { params });
     */
   },
 
@@ -68,6 +69,7 @@ export default {
     ...mapActions(usePagesStore, ['loadPages']),
     ...mapActions(useInterviewsStore, ['loadInterviews']),
     ...mapActions(useProjectsStore, ['loadProjects']),
+    ...mapActions(useLocationsStore, ['loadLocations']),
   },
 }
 </script>
