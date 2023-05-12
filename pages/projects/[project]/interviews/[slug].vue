@@ -48,11 +48,11 @@
         <Field>
           <iframe
             width="100%"
-            height="100"
+            height="20"
             scrolling="no"
             frameborder="no"
             allow="autoplay"
-            :src="interview['Audio Link']"
+            :src="interview['Audio Embed URL']"
           ></iframe>
         </Field>
         <Field class="index" label="Index">
@@ -90,11 +90,20 @@ export default {
     }),
 
     interview() {
+      /*
+<iframe width="100%" height="20" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1484345803%3Fsecret_token%3Ds-48vNMPkgqKt&color=%230a0a0a&inverse=false&auto_play=false&show_user=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/housing-justice-oral-history-project" title="Housing Justice Oral History Project" target="_blank" style="color: #cccccc; text-decoration: none;">Housing Justice Oral History Project</a> · <a href="https://soundcloud.com/housing-justice-oral-history-project/jessica-fielding-march-9-2023/s-48vNMPkgqKt" title="Jessica Fielding, March 9 2023" target="_blank" style="color: #cccccc; text-decoration: none;">Jessica Fielding, March 9 2023</a></div>
+      */
       return this.interviewBySlug(this.$route.params.slug)?.[0] ?? {};
     },
 
     project() {
       return this.projectBySlug(this.$route.params.project)?.[0] ?? {};
+    },
+  },
+
+  watch: {
+    interview() {
+      console.log(this.interview);
     },
   },
 }
