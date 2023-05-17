@@ -6,13 +6,13 @@
       <Field label="About">
         <RichText class="field-value" :text="project.About" />
       </Field>
-      <Field label="Project Goals and Methods">
+      <Field label="Values, Purpose, and Methods">
         <RichText class="field-value" :text="project.Goals" />
       </Field>
       <Field label="Team and Collaborators">
         <RichText class="field-value" :text="project.Team" />
       </Field>
-      <Field label="Oral History Interviews">
+      <Field label="Oral Histories">
         <ul class="plain-list">
           <li
             v-for="interview in interviews"
