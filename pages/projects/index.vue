@@ -36,13 +36,4 @@ ul {
   flex-direction: column;
   gap: 0.5rem;
 }
-
-ul a {
-  color: black;
-  text-decoration: none;
-}
-
-ul a:hover {
-  text-decoration: underline;
-}
 </style>

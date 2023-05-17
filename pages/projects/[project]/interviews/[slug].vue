@@ -1,5 +1,9 @@
 <template>
   <div class="interview-page page-wide">
+    <div class="navigation-back">
+      <NuxtLink :to="`/projects/${project.Slug}`">&lt; {{ project.Name }}</NuxtLink>
+    </div>
+
     <h2>{{ interview.Name }}</h2>
 
     <div class="fields">
@@ -159,5 +163,10 @@ export default {
 .interview-page .index td {
   vertical-align: top;
   padding: 0.5rem;
+}
+
+.navigation-back {
+  font-size: 0.9em;
+  margin-bottom: 2rem;
 }
 </style>
