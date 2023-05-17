@@ -153,6 +153,11 @@ export default {
   background: #F1F0F0;
   padding: 1rem;
 }
+
+.navigation-back {
+  font-size: 0.9em;
+  margin-bottom: 2rem;
+}
 </style>
 
 <style>
@@ -163,10 +168,5 @@ export default {
 .interview-page .index td {
   vertical-align: top;
   padding: 0.5rem;
-}
-
-.navigation-back {
-  font-size: 0.9em;
-  margin-bottom: 2rem;
 }
 </style>
