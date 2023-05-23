@@ -1,5 +1,9 @@
 <template>
   <div class="page-wide">
+    <div class="navigation-back">
+      <NuxtLink to="/projects">&lt; Oral History Projects</NuxtLink>
+    </div>
+
     <h2>{{ project.Name }}</h2>
 
     <FieldColumn>
@@ -85,6 +89,10 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  margin-bottom: 2rem;
+}
+
 .short-fields {
   display: flex;
   flex-direction: column;
@@ -106,5 +114,10 @@ export default {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.navigation-back {
+  font-size: 0.9em;
+  margin-bottom: 2rem;
 }
 </style>
