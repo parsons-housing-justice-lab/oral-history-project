@@ -16,6 +16,10 @@ const props = defineProps({
 </script>
 
 <style scoped>
+section {
+  margin: 3rem 0;
+}
+
 img {
   max-width: 100%;
 }
