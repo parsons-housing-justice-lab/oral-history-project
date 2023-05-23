@@ -1,13 +1,6 @@
 <template>
-  <div>
-    <h2>Get Involved</h2>
-  </div>
+  <ContentPage name="Get Involved" />
 </template>
 
-<script>
-export default {
-}
+<script setup>
 </script>
-
-<style scoped>
-</style>
