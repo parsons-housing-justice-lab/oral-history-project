@@ -1,5 +1,5 @@
 <template>
-  <div class="interview-page page-wide">
+  <div class="interview-page page-wide" :class="interview.Slug">
     <div class="navigation-back">
       <NuxtLink :to="`/projects/${project.Slug}`">&lt; {{ project.Name }}</NuxtLink>
     </div>
@@ -157,6 +157,10 @@ export default {
 .navigation-back {
   font-size: 0.9em;
   margin-bottom: 2rem;
+}
+
+.ivette-de-la-cruz-2 {
+  font-size: 0.9em;
 }
 </style>
 
