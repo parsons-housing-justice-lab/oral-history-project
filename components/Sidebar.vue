@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <SidebarSection class="top-section">
-      <NuxtLink to="/" class="home-link">
+      <NuxtLink v-on:click.native="showWelcome" to="/" class="home-link">
         <OhpLogo />
       </NuxtLink>
       <div class="top-section-content">
@@ -12,12 +12,15 @@
 </template>
 
 <script>
+import { mapActions } from 'pinia';
 import OhpLogo from '@/assets/img/ohp-logo.svg';
+import { useWelcomeStore } from '@/store/welcome';
 
 export default {
   components: { OhpLogo },
 
-  computed: {
+  methods: {
+    ...mapActions(useWelcomeStore, { showWelcome: 'toggleShow' }),
   },
 }
 </script>

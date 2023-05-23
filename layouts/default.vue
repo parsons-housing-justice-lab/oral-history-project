@@ -14,7 +14,7 @@
       <div
         class="welcome-close"
         v-if="showWelcomeClose"
-        @click="welcomeHidden = true"
+        @click="hideWelcome()"
       >&times;</div>
       <slot />
     </div>
@@ -25,18 +25,13 @@
 import { mapActions, mapState } from 'pinia';
 import { useLocationsStore } from '@/store/locations';
 import { useTextBlocksStore } from '@/store/textBlocks';
+import { useWelcomeStore } from '@/store/welcome';
 import { usePagesStore } from '@/store/pages';
 import { useInterviewsStore } from '@/store/interviews';
 import { useProjectsStore } from '@/store/projects';
 
 export default {
   name: 'IndexPage',
-
-  data() {
-    return {
-      welcomeHidden: false,
-    };
-  },
 
   async mounted() {
     this.loadLocations();
@@ -55,6 +50,12 @@ export default {
       title: store => store.byType('Title')[0],
     }),
 
+    ...mapState(useWelcomeStore, {
+      welcomeHidden: store => {
+        return !store.show;
+      },
+    }),
+
     showContent() {
       return !this.welcomeHidden || this.$route.path !== '/';
     },
@@ -70,6 +71,7 @@ export default {
     ...mapActions(useInterviewsStore, ['loadInterviews']),
     ...mapActions(useProjectsStore, ['loadProjects']),
     ...mapActions(useLocationsStore, ['loadLocations']),
+    ...mapActions(useWelcomeStore, { hideWelcome: 'toggleHide' }),
   },
 }
 </script>
