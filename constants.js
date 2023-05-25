@@ -4,6 +4,7 @@ export const AIRTABLE_INTERVIEWS_TABLE = 'interviews';
 export const AIRTABLE_LOCATIONS_TABLE = 'locations';
 export const AIRTABLE_PAGES_TABLE = 'pages';
 export const AIRTABLE_PAGE_SECTIONS_TABLE = 'page sections';
+export const AIRTABLE_PEOPLE_TABLE = 'people';
 export const AIRTABLE_PROJECTS_TABLE = 'projects';
 export const AIRTABLE_TEXT_BLOCKS_TABLE = 'text blocks';
 

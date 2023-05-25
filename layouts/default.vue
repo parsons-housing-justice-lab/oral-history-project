@@ -27,6 +27,7 @@ import { useLocationsStore } from '@/store/locations';
 import { useTextBlocksStore } from '@/store/textBlocks';
 import { useWelcomeStore } from '@/store/welcome';
 import { usePagesStore } from '@/store/pages';
+import { usePeopleStore } from '@/store/people';
 import { useInterviewsStore } from '@/store/interviews';
 import { useProjectsStore } from '@/store/projects';
 
@@ -37,6 +38,7 @@ export default {
     this.loadLocations();
     this.loadTextBlocks();
     this.loadPages();
+    this.loadPeople();
     this.loadProjects();
     this.loadInterviews();
     /*
@@ -69,6 +71,7 @@ export default {
     ...mapActions(useTextBlocksStore, ['loadTextBlocks']),
     ...mapActions(usePagesStore, ['loadPages']),
     ...mapActions(useInterviewsStore, ['loadInterviews']),
+    ...mapActions(usePeopleStore, ['loadPeople']),
     ...mapActions(useProjectsStore, ['loadProjects']),
     ...mapActions(useLocationsStore, ['loadLocations']),
     ...mapActions(useWelcomeStore, { hideWelcome: 'toggleHide' }),

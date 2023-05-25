@@ -16,6 +16,9 @@
       <li>
         <NuxtLink to="/get-involved">Get Involved</NuxtLink>
       </li>
+      <li>
+        <NuxtLink to="/people">People</NuxtLink>
+      </li>
     </ol>
   </nav>
 </template>

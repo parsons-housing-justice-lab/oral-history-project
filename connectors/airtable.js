@@ -5,6 +5,7 @@ import {
   AIRTABLE_LOCATIONS_TABLE,
   AIRTABLE_INTERVIEWS_TABLE,
   AIRTABLE_PAGES_TABLE,
+  AIRTABLE_PEOPLE_TABLE,
   AIRTABLE_PAGE_SECTIONS_TABLE,
   AIRTABLE_PROJECTS_TABLE,
   AIRTABLE_TEXT_BLOCKS_TABLE,
@@ -54,6 +55,11 @@ export const getPages = async () => {
 export const getPageSections = async () => {
   // TODO only published
   return await getRecords(AIRTABLE_PAGE_SECTIONS_TABLE);
+};
+
+export const getPeople = async () => {
+  // TODO only published
+  return await getRecords(AIRTABLE_PEOPLE_TABLE);
 };
 
 export const getProjects = async () => {
