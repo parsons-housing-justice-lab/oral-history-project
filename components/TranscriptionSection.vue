@@ -42,7 +42,8 @@ const parseTranscription = text => {
       currentLines = [];
     }
     else {
-      currentLines.push(line);
+      if (line === ' ') currentLines.push('<br />');
+      else currentLines.push(line);
     }
   }
 
