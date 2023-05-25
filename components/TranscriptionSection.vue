@@ -46,6 +46,13 @@ const parseTranscription = text => {
     }
   }
 
+  if (currentTime && currentLines.length) {
+    rows.push({
+      time: currentTime,
+      text: currentLines.join('\n'),
+    });
+  }
+
   if (rows.length) return rows;
   return text;
 };
