@@ -7,6 +7,9 @@
     <h1>{{ project.Name }}</h1>
 
     <FieldColumn>
+      <Field v-if="project.Photo">
+        <img class="photo" :src="project.Photo[0].url" />
+      </Field>
       <Field v-if="project.About">
         <h2>About</h2>
         <RichText class="field-value" :text="project.About" />
@@ -125,5 +128,10 @@ h1 {
 .navigation-back {
   font-size: 0.9em;
   margin-bottom: 2rem;
+}
+
+img {
+  max-width: 100%;
+  max-height: 25rem;
 }
 </style>
