@@ -93,8 +93,7 @@ main {
   border-left: var(--border-width) solid var(--color-dark-gray);
   border-bottom: var(--border-width) solid var(--color-dark-gray);
   font-size: 0.9em;
-  padding: 3rem;
-  padding-left: 2rem;
+  padding: 2rem;
   position: absolute;
   top: 0;
   right: 0;

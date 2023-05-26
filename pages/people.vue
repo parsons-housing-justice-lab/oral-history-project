@@ -1,8 +1,8 @@
 <template>
   <div class="people-page page-wide">
-    <h2>People</h2>
+    <h1>People</h1>
     <section>
-      <h3>Team</h3>
+      <h2>Team</h2>
       <ol class="team-list">
         <li class="team-item" v-for="person in store.team" :key="person.Name">
           <span class="name">{{ person.Name }}</span>
@@ -11,7 +11,7 @@
       </ol>
     </section>
     <section>
-      <h3>Collaborators</h3>
+      <h2>Collaborators</h2>
       <ol class="collaborators-list">
         <li v-for="person in store.collaborators" :key="person.Name">
           <span class="name">{{ person.Name }}</span>
@@ -51,6 +51,10 @@ ol {
 
 .team-item .description {
   display: inline;
+}
+
+section {
+  margin-bottom: 3rem;
 }
 </style>
 

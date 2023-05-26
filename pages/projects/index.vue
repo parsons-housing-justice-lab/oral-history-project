@@ -1,6 +1,6 @@
 <template>
   <div class="page-medium">
-    <h2>Oral History Projects</h2>
+    <h1>Oral History Projects</h1>
     <PageSections name="Oral History Projects" />
     <div>
       <ul>
