@@ -14,7 +14,7 @@ export const useInterviewsStore = defineStore('interviews', {
       .filter(({ Slug }) => Slug === slug),
 
     byProject: state => id => state.interviews
-      .filter(({ Projects }) => Projects.includes(id)),
+      .filter(({ Projects }) => Projects?.includes(id)) ?? false,
   },
 
   actions: {
