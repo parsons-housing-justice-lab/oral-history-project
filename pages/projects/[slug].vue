@@ -4,19 +4,23 @@
       <NuxtLink to="/projects">&lt; Oral History Projects</NuxtLink>
     </div>
 
-    <h2>{{ project.Name }}</h2>
+    <h1>{{ project.Name }}</h1>
 
     <FieldColumn>
-      <Field label="About">
+      <Field v-if="project.About">
+        <h2>About</h2>
         <RichText class="field-value" :text="project.About" />
       </Field>
-      <Field label="Values, Purpose, and Methods">
+      <Field v-if="project.Goals">
+        <h2>Values, Purpose, and Methods</h2>
         <RichText class="field-value" :text="project.Goals" />
       </Field>
-      <Field label="Team and Collaborators">
+      <Field v-if="project.Team">
+        <h2>Team and Collaborators</h2>
         <RichText class="field-value" :text="project.Team" />
       </Field>
-      <Field label="Oral Histories">
+      <Field v-if="interviews">
+        <h2>Oral Histories</h2>
         <ul class="plain-list">
           <li
             v-for="interview in interviews"
@@ -28,7 +32,8 @@
           </li>
         </ul>
       </Field>
-      <Field label="Overarching Themes">
+      <Field v-if="project.Themes">
+        <h2>Overarching Themes</h2>
         <ul class="plain-list">
           <li
             v-for="theme in project.Themes"
@@ -38,7 +43,8 @@
           </li>
         </ul>
       </Field>
-      <Field label="Connect">
+      <Field>
+        <h2>Connect</h2>
         <div class="short-fields">
           <div class="short-field" v-if="project.Keywords?.length ?? false">
             <span class="label">Keywords:</span>
@@ -89,7 +95,7 @@ export default {
 </script>
 
 <style scoped>
-h2 {
+h1 {
   margin-bottom: 2rem;
 }
 
