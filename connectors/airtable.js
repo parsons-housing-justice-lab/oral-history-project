@@ -11,13 +11,18 @@ import {
   AIRTABLE_TEXT_BLOCKS_TABLE,
 } from "@/constants";
 
-const getRecords = async (table, progressCallback) => {
+const getRecords = async (table, selectOptions = {}, progressCallback = null) => {
   const base = new Airtable({apiKey: AIRTABLE_API_KEY}).base(AIRTABLE_DATABASE_ID);
 
   return new Promise((resolve, reject) => {
     let allRecords = [];
 
-    base(table).select({ maxRecords: 2500 })
+    const options = {
+      maxRecords: 2500,
+      ...selectOptions,
+    };
+
+    base(table).select(options)
       .eachPage(
         (records, fetchNextPage) => {
           const recordsBatch = records.map(r => ({
@@ -39,13 +44,18 @@ const getRecords = async (table, progressCallback) => {
 };
 
 export const getLocations = async () => {
-  // TODO only published
-  return await getRecords(AIRTABLE_LOCATIONS_TABLE);
+  return await getRecords(AIRTABLE_LOCATIONS_TABLE, {
+    filterByFormula: "{Status} = 'Published'",
+  });
 };
 
 export const getInterviews = async () => {
-  // TODO only published
-  return await getRecords(AIRTABLE_INTERVIEWS_TABLE);
+  return await getRecords(AIRTABLE_INTERVIEWS_TABLE, {
+    filterByFormula: "{Status} = 'Published'",
+    sort: [
+      { field: 'Name' },
+    ]
+  });
 };
 
 export const getPages = async () => {
@@ -53,18 +63,22 @@ export const getPages = async () => {
 };
 
 export const getPageSections = async () => {
-  // TODO only published
   return await getRecords(AIRTABLE_PAGE_SECTIONS_TABLE);
 };
 
 export const getPeople = async () => {
-  // TODO only published
-  return await getRecords(AIRTABLE_PEOPLE_TABLE);
+  return await getRecords(AIRTABLE_PEOPLE_TABLE, {
+    filterByFormula: "{Status} = 'Published'",
+    sort: [
+      { field: 'Order' },
+    ]
+  });
 };
 
 export const getProjects = async () => {
-  // TODO only published
-  return await getRecords(AIRTABLE_PROJECTS_TABLE);
+  return await getRecords(AIRTABLE_PROJECTS_TABLE, {
+    filterByFormula: "{Status} = 'Published'",
+  });
 };
 
 export const getTextBlocks = async () => {

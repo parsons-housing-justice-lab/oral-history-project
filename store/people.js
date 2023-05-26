@@ -14,9 +14,7 @@ export const usePeopleStore = defineStore('people', {
   actions: {
     async loadPeople() {
       if (this.people.length > 0) return;
-      const people = await getPeople();
-
-      this.people = people.sort((a, b) => a.Order - b.Order);
+      this.people = await getPeople();
     },
   },
 });
