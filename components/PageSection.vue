@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h3 v-if="section.Header">{{ section.Header }}</h3>
+    <h2 v-if="section.Header">{{ section.Header }}</h2>
     <img v-if="section.Image" :src="section.Image[0].url" />
     <div
       v-if="section.Content"

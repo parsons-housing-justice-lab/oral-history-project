@@ -4,7 +4,7 @@
       <NuxtLink :to="`/projects/${project.Slug}`">&lt; {{ project.Name }}</NuxtLink>
     </div>
 
-    <h2>{{ interview.Name }}</h2>
+    <h1>{{ interview.Name }}</h1>
 
     <div class="fields">
       <div class="row">
