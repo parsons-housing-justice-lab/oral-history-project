@@ -78,6 +78,9 @@ export const getPeople = async () => {
 export const getProjects = async () => {
   return await getRecords(AIRTABLE_PROJECTS_TABLE, {
     filterByFormula: "{Status} = 'Published'",
+    sort: [
+      { field: 'Name' },
+    ],
   });
 };
 
