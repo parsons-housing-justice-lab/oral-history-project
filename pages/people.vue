@@ -41,6 +41,7 @@ ol {
 .team-list {
   display: grid;
   grid-template-columns: auto auto;
+  column-gap: 2rem;
   row-gap: 2rem;
 }
 
