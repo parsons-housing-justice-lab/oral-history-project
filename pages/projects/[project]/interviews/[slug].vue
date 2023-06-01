@@ -29,9 +29,6 @@
       </div>
       <div class="row">
         <FieldColumn class="description-column-left">
-          <Field label="Biography">
-            <RichText :text="interview.Biography" />
-          </Field>
           <Field label="Interview Description">
             <RichText :text="interview.Description" />
           </Field>
