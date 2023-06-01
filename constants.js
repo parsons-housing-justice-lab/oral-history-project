@@ -6,6 +6,7 @@ export const AIRTABLE_PAGES_TABLE = 'pages';
 export const AIRTABLE_PAGE_SECTIONS_TABLE = 'page sections';
 export const AIRTABLE_PEOPLE_TABLE = 'people';
 export const AIRTABLE_PROJECTS_TABLE = 'projects';
+export const AIRTABLE_PROJECT_ATTACHMENTS_TABLE = 'project attachments';
 export const AIRTABLE_TEXT_BLOCKS_TABLE = 'text blocks';
 
 export const MAPBOX_STYLE = 'mapbox://styles/housingjusticelab2019/clga8nlf200cv01mksssposgz';

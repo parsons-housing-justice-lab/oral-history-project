@@ -28,6 +28,7 @@ import { useTextBlocksStore } from '@/store/textBlocks';
 import { useWelcomeStore } from '@/store/welcome';
 import { usePagesStore } from '@/store/pages';
 import { usePeopleStore } from '@/store/people';
+import { useProjectAttachmentsStore } from '@/store/projectAttachments';
 import { useInterviewsStore } from '@/store/interviews';
 import { useProjectsStore } from '@/store/projects';
 
@@ -40,6 +41,7 @@ export default {
     this.loadPages();
     this.loadPeople();
     this.loadProjects();
+    this.loadProjectAttachments();
     this.loadInterviews();
     /*
     const params = this.$route.query;
@@ -73,6 +75,7 @@ export default {
     ...mapActions(useInterviewsStore, ['loadInterviews']),
     ...mapActions(usePeopleStore, ['loadPeople']),
     ...mapActions(useProjectsStore, ['loadProjects']),
+    ...mapActions(useProjectAttachmentsStore, ['loadProjectAttachments']),
     ...mapActions(useLocationsStore, ['loadLocations']),
     ...mapActions(useWelcomeStore, { hideWelcome: 'toggleHide' }),
   },

@@ -8,6 +8,7 @@ import {
   AIRTABLE_PEOPLE_TABLE,
   AIRTABLE_PAGE_SECTIONS_TABLE,
   AIRTABLE_PROJECTS_TABLE,
+  AIRTABLE_PROJECT_ATTACHMENTS_TABLE,
   AIRTABLE_TEXT_BLOCKS_TABLE,
 } from "@/constants";
 
@@ -77,6 +78,15 @@ export const getPeople = async () => {
 
 export const getProjects = async () => {
   return await getRecords(AIRTABLE_PROJECTS_TABLE, {
+    filterByFormula: "{Status} = 'Published'",
+    sort: [
+      { field: 'Name' },
+    ],
+  });
+};
+
+export const getProjectAttachments = async () => {
+  return await getRecords(AIRTABLE_PROJECT_ATTACHMENTS_TABLE, {
     filterByFormula: "{Status} = 'Published'",
     sort: [
       { field: 'Name' },

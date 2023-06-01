@@ -47,6 +47,32 @@
         </ul>
       </Field>
       <Field>
+        <h2>Popular Education</h2>
+        <ul class="plain-list">
+          <li
+            v-for="attachment in popularEducationAttachments"
+            :key="attachment.id"
+          >
+            <a :href="attachment.File[0].url" target="_blank">
+              <img :src="attachment.File[0].thumbnails.large.url" />
+            </a>
+          </li>
+        </ul>
+      </Field>
+      <Field>
+        <h2>Archive</h2>
+        <ul class="plain-list">
+          <li
+            v-for="attachment in archiveAttachments"
+            :key="attachment.id"
+          >
+            <a :href="attachment.File[0].url" target="_blank">
+              <img :src="attachment.File[0].thumbnails.large.url" />
+            </a>
+          </li>
+        </ul>
+      </Field>
+      <Field>
         <h2>Connect</h2>
         <div class="short-fields">
           <div class="short-field" v-if="project.Keywords?.length ?? false">
@@ -75,6 +101,7 @@
 import { mapState } from 'pinia';
 import { useInterviewsStore } from '@/store/interviews';
 import { useProjectsStore } from '@/store/projects';
+import { useProjectAttachmentsStore } from '@/store/projectAttachments';
 
 export default {
   computed: {
@@ -85,6 +112,23 @@ export default {
     ...mapState(useInterviewsStore, {
       interviewsByProject: 'byProject',
     }),
+
+    ...mapState(useProjectAttachmentsStore, {
+      attachmentsByProject: 'byProject',
+    }),
+
+    attachments() {
+      return this.attachmentsByProject(this.project.id);
+    },
+
+    archiveAttachments() {
+      return this.attachments.filter(({ Section }) => Section === 'Archive');
+    },
+
+    popularEducationAttachments() {
+      return this.attachments
+        .filter(({ Section }) => Section === 'Popular Education');
+    },
 
     interviews() {
       return this.interviewsByProject(this.project.id);
