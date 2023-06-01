@@ -112,8 +112,8 @@ main {
   flex-direction: row;
   font-size: 2.5rem;
   line-height: 2rem;
-  margin-top: -2.5rem;
-  margin-right: -2.5rem;
+  margin-top: -1.5rem;
+  margin-right: -1.5rem;
   justify-content: flex-end;
 }
 </style>
