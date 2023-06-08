@@ -20,7 +20,13 @@ export const useInterviewsStore = defineStore('interviews', {
   actions: {
     async loadInterviews() {
       if (this.interviews.length > 0) return;
-      this.interviews = await getInterviews();
+      this.interviews = (await getInterviews()).map((interview) => ({
+        ...interview,
+        Transcription: [
+          interview.Transcription,
+          interview['Transcription 2'],
+        ].filter(v => !!v).join('\n')
+      }));
     },
   },
 });
