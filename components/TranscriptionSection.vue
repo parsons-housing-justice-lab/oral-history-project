@@ -12,7 +12,7 @@ const props = defineProps({
   transcription: String,
 })
 
-const timeRegex = /^\s*\[\d*:\d*\]\s*$/;
+const timeRegex = /^\s*\[(\d*:)+\d*\]\s*$/;
 
 const parseTranscription = text => {
   if (!text) return null;
