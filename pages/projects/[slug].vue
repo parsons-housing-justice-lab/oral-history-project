@@ -48,7 +48,7 @@
       </Field>
       <Field>
         <h2>Popular Education</h2>
-        <ul class="plain-list">
+        <ul class="plain-list attachment-list">
           <li
             v-for="attachment in popularEducationAttachments"
             :key="attachment.id"
@@ -61,7 +61,7 @@
       </Field>
       <Field>
         <h2>Archive</h2>
-        <ul class="plain-list">
+        <ul class="plain-list attachment-list">
           <li
             v-for="attachment in archiveAttachments"
             :key="attachment.id"
@@ -163,6 +163,12 @@ h1 {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.attachment-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .navigation-back {
