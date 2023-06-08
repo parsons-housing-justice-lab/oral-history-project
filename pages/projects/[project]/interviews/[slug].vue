@@ -34,14 +34,20 @@
           </Field>
         </FieldColumn>
         <FieldColumn class="description-column-right">
-          <Field label="People">
+          <Field v-if="interview.Themes" label="Themes">
+            <RichText :text="interview.Themes" />
+          </Field>
+          <Field v-if="interview.People" label="People">
             <RichText :text="interview.People" />
           </Field>
-          <Field label="Topics">
-            <RichText :text="interview.Topics" />
+          <Field v-if="interview.Keywords" label="Keywords">
+            <RichText :text="interview.Keywords" />
           </Field>
-          <Field label="Places">
+          <Field v-if="interview.Places" label="Places">
             <RichText :text="interview.Places" />
+          </Field>
+          <Field v-if="interview.Campaigns" label="Campaigns">
+            <RichText :text="interview.Campaigns" />
           </Field>
         </FieldColumn>
       </div>
