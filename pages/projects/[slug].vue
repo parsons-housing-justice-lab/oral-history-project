@@ -75,10 +75,6 @@
       <Field>
         <h2>Connect</h2>
         <div class="short-fields">
-          <div class="short-field" v-if="project.Keywords?.length ?? false">
-            <span class="label">Keywords:</span>
-            <span class="value">{{ project.Keywords.join(', ') }}</span>
-          </div>
           <div class="short-field" v-if="project.Contact">
             <span class="label">Contact:</span>
             <span class="value">{{ project.Contact }}</span>
