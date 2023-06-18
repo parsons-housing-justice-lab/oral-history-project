@@ -171,6 +171,10 @@ h1 {
   gap: 1rem;
 }
 
+.attachment-list li {
+  max-width: 12rem;
+}
+
 .navigation-back {
   font-size: 0.9em;
   margin-bottom: 2rem;
