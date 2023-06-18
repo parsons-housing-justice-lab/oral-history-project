@@ -13,8 +13,13 @@
     <section>
       <h2>Collaborators</h2>
       <ol class="collaborators-list">
-        <li v-for="person in store.collaborators" :key="person.Name">
-          <span class="name">{{ person.Name }}</span>
+        <li
+          v-for="person in store.collaborators"
+          :key="person.Name"
+          class="collaborator-item"
+        >
+          <span class="name">{{ person.Name }}.</span>
+          <span class="description">{{ person.Description }}</span>
         </li>
       </ol>
     </section>
@@ -52,6 +57,10 @@ ol {
 
 .team-item .description {
   display: inline;
+}
+
+.collaborator-item .name {
+  margin-right: 0.5rem;
 }
 
 section {
