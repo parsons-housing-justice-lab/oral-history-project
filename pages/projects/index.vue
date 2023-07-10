@@ -21,6 +21,7 @@
           {{ category }}
         </option>
       </select>
+      <input type="search" />
     </div>
     <div>
       <ul>
@@ -29,6 +30,16 @@
           :key="project.Slug"
         >
           <NuxtLink :to="`/projects/${project.Slug}`">{{ project.Name }}</NuxtLink>
+          <div v-if="project.Name === 'Cooper Square Community Land Trust'"
+            class="search-result">
+            <div class="title">
+              Tom Angotti
+            </div>
+            <div class="text">
+              "[...] Then went to get my Ph.D. at Rutgers University in New Jersey in
+              <strong>urban planning</strong>.[...]" 
+            </div>
+          </div>
         </li>
       </ul>
     </div>
@@ -89,7 +100,8 @@ ul {
   gap: 0.5rem;
 }
 
-select {
+select,
+input {
   background: black;
   color: white;
   padding: 0.5rem;
@@ -100,5 +112,18 @@ select {
   display: flex;
   flex-direction: row;
   gap: 2rem;
+}
+
+.search-result {
+  margin-left: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  font-size: 0.9em;
+}
+
+.search-result .text {
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+  font-size: 0.9em;
 }
 </style>
