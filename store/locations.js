@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { getLocations } from "@/connectors/airtable";
-import { toGeoJson } from '@/transformers/locations';
+import { toGeoJson, toPolygonGeoJson } from '@/transformers/locations';
 
 export const useLocationsStore = defineStore('locations', {
   state: () => ({
@@ -11,7 +11,9 @@ export const useLocationsStore = defineStore('locations', {
     byId: state => id => state.locations
       .filter(({ Id }) => '' + Id === id),
 
-    locationsGeoJson: (state) => toGeoJson(state.locations),
+    pointsGeoJson: (state) => toGeoJson(state.locations),
+
+    polygonsGeoJson: (state) => toPolygonGeoJson(state.locations),
   },
 
   actions: {

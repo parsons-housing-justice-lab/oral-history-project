@@ -1,5 +1,8 @@
 <template>
-  <div id="map" class="map"></div>
+  <div class="map-wrapper">
+    <div id="map" class="map"></div>
+    <map-legend />
+  </div>
 </template>
 
 <script>
@@ -14,6 +17,7 @@ import {
   MAXIMUM_EXTENT,
 } from "@/constants";
 import { useLocationsStore } from '@/store/locations';
+import { useProjectsStore } from '@/store/projects';
 import { useMapStore } from '@/store/map';
 
 export default {
@@ -36,16 +40,20 @@ export default {
 
   computed: {
     ...mapStores(useMapStore),
-    ...mapState(useLocationsStore, ['locationsGeoJson']),
+    ...mapState(useLocationsStore, {
+      locationPointsGeoJson: 'pointsGeoJson',
+      locationPolygonsGeoJson: 'polygonsGeoJson',
+    }),
+    ...mapState(useProjectsStore, ['projects']),
 
-    locationsLayer() {
+    locationPointsLayer() {
       return {
         id: 'locations',
         type: 'symbol',
         source: 'locations-source',
         layout: {
           'icon-allow-overlap': true,
-          'icon-image': 'CLT-Coop-MHA',
+          'icon-image': 'CLT', // TODO conditionally
           'icon-size': [
             'interpolate', ['linear'], ['zoom'],
             12, 0.5,
@@ -55,17 +63,18 @@ export default {
       };
     },
 
-    locationsSource() {
+    locationPointsSource() {
       return {
         type: 'geojson',
-        data: this.locationsGeoJson,
+        data: this.locationPointsGeoJson,
       };
     },
 
-    highlightedFeatures() {
-      // TODO pinia
-      return [];
-      // return this.$store.getters['map/highlightedFeatures'];
+    locationPolygonsSource() {
+      return {
+        type: 'geojson',
+        data: this.locationPolygonsGeoJson,
+      };
     },
 
     storeCenter() {
@@ -80,16 +89,11 @@ export default {
       return INITIAL_ZOOM;
     },
 
-    unselectedLayers() {
-      // return this.$store.getters['layerPicker/unselectedLayers'];
-      // TODO pinia
-      return [];
-    },
-
-    selectedLayers() {
-      // return this.$store.getters['layerPicker/selectedLayers'];
-      // TODO pinia
-      return [];
+    selectedProjectSlug() {
+      const { name, params } = this.$route;
+      if (name === 'projects-slug') return params.slug;
+      if (name === 'projects-project-interviews-slug') return params.project;
+      return null;
     },
   },
 
@@ -109,19 +113,50 @@ export default {
       });
 
       map.on('load', this.mapLoaded);
-      map.on('click', this.handleClick);
+      map.on('click', ['locations'], this.handleClick);
+      map.on('mouseenter', ['locations'], this.handleMouseEnter);
+      map.on('mouseleave', ['locations'], this.handleMouseLeave);
       map.on('move', this.handleMove);
       map.on('moveend', this.handleMoveEnd);
     },
 
-    addLocationsSource() {
-      // TODO detect existing and overwrite
-      this.map.addSource('locations-source', this.locationsSource);
+    addLocationPointsSource() {
+      const existingSource = this.map.getSource('locations-source');
+      if (existingSource) {
+        existingSource.setData(this.locationPointsGeoJson);
+      }
+      else {
+        this.map.addSource('locations-source', this.locationPointsSource);
+      }
     },
 
-    addLocationsLayer() {
-      // TODO detect existing and overwrite
-      this.map.addLayer(this.locationsLayer);
+    addLocationPolygonsSource() {
+      const existingSource = this.map.getSource('locations-polygons-source');
+      if (existingSource) {
+        existingSource.setData(this.locationPolygonsGeoJson);
+      }
+      else {
+        this.map.addSource('location-polygons-source', this.locationPolygonsSource);
+      }
+    },
+
+    addLocationPolygonsLayer() {
+      this.map.addLayer({
+        id: 'location-polygons',
+        type: 'fill',
+        source: 'location-polygons-source',
+        paint: {
+          'fill-pattern': 'fill', // TODO by feature
+        },
+        layout: {
+          visibility: 'none',
+        },
+      }, 'locations'); // TODO before labels instead
+    },
+
+    addLocationPointsLayer() {
+      if (this.map.getLayer(this.locationPointsLayer.id)) return;
+      this.map.addLayer(this.locationPointsLayer);
     },
 
     async mapLoaded(e) {
@@ -131,56 +166,77 @@ export default {
         zoom: this.storeZoom
       });
 
-
-      this.addLocationsSource();
+      this.addLocationPointsSource();
+      this.addLocationPolygonsSource();
 
       await this.loadIcons();
-      this.addLocationsLayer();
+      this.addLocationPointsLayer();
+      this.addLocationPolygonsLayer();
     },
 
-    loadIcons() {
-      // TODO better way to reference subdir
-      // TODO async / return promise
-      // TODO add other icons
-      this.map.loadImage('/oral-history-project/map-icons/CLT.png', (error, image) => {
-        if (error) throw error;
-        if (!this.map.hasImage('CLT')) this.map.addImage('CLT', image);
+    async loadIcon(name, path) {
+      return new Promise((resolve, reject) => {
+        // TODO better way to reference subdir
+        // const basepath = window.location.pathname;
+        const basepath = '/oral-history-project';
+        const mapIconsPath = 'map-icons';
+        const fullpath = `${basepath}/${mapIconsPath}/${path}`;
+        this.map.loadImage(fullpath, (error, image) => {
+          if (error) return reject(error);
+          if (!this.map.hasImage(name)) this.map.addImage(name, image);
+          return resolve();
+        });
       });
+    },
 
-      this.map.loadImage('/oral-history-project/map-icons/CLT-Coop-MHA.png', (error, image) => {
-        if (error) throw error;
-        if (!this.map.hasImage('CLT')) this.map.addImage('CLT-Coop-MHA', image);
-      });
+    async loadIcons() {
+      // TODO add other icons
+      const icons = [
+        {
+          name: 'CLT',
+          path: 'CLT.png',
+        },
+        {
+          name: 'CLT-Coop-MHA',
+          path: 'CLT-Coop-MHA.png',
+        },
+        {
+          name: 'fill',
+          path: 'fill.png',
+        },
+      ];
+      return Promise.all(icons.map(({ name, path }) => this.loadIcon(name, path)));
     },
 
     handleClick(e) {
-      // TODO pinia
-      /*
-      const selectedFeatures = this.map.queryRenderedFeatures(
-        e.mapboxEvent.point, { layers: [this.locationsLayer.id] }
-      );
-      this.$store.dispatch("popup/setSelectedFeatures", { selectedFeatures });
-       */
+      const projectId = e.features[0].properties.project;
+      if (!projectId) return;
+
+      const project = this.projects.find(({ id }) => id === projectId);
+      if (!project) return;
+
+      navigateTo(`/projects/${project.Slug}`);
     },
 
-    handleMouseMove(e) {
-      const feature = e.mapboxEvent.features[0];
+    handleMouseEnter(e) {
+      const feature = e.features[0];
       if (feature) {
         const layer = feature.layer.id;
         const id = feature.id;
-        // TODO pinia
-        // this.$store.dispatch("map/setHoveredFeature", { layer, id });
-      } else {
-        // TODO pinia
-        // this.$store.dispatch("map/setHoveredFeature", {});
+        // TODO tooltip
+
+        this.map.setFilter('location-polygons', 
+          ['==', ['get', 'project'], feature.properties.project],
+        );
+        this.map.setLayoutProperty('location-polygons', 'visibility', 'visible');
       }
 
       this.hovered = true;
     },
 
     handleMouseLeave() {
-      // TODO pinia
-      // this.$store.dispatch("map/setHoveredFeature", {});
+      this.map.setFilter('location-polygons', null);
+      this.map.setLayoutProperty('location-polygons', 'visibility', 'none');
       this.hovered = false;
     },
 
@@ -208,67 +264,9 @@ export default {
         zoom: this.storeZoom,
       });
     },
-
-    changeLayersVisibility(layerIds, visibility) {
-      layerIds.forEach(layerId => {
-        this.map.setLayoutProperty(layerId, 'visibility', visibility);
-      });
-    },
-
-    hideUnselectedLayers() {
-      this.unselectedLayers.forEach(layer => {
-        this.changeLayersVisibility(layer.layerIds, 'none');
-      });
-    },
-
-    showSelectedLayers() {
-      this.selectedLayers.forEach(layer => {
-        this.changeLayersVisibility(layer.layerIds, 'visible');
-      });
-    },
   },
 
   watch: {
-    unselectedLayers() {
-      this.hideUnselectedLayers();
-    },
-
-    selectedLayers() {
-      this.showSelectedLayers();
-    },
-
-    highlightedFeatures(currentValue, previousValue) {
-      let layer = currentValue?.[0]?.layer;
-      let ids = currentValue.map(({ id }) => id);
-      let iconImageExpression;
-      let symbolSortKeyExpression;
-
-      if (layer && ids) {
-        iconImageExpression = [
-          "case",
-          ["in", ['get', 'ID'], ["literal", ids]],
-          ['concat', 'marker_', ['get', 'sectorSlug'], '_highlight'],
-          ['concat', 'marker_', ['get', 'sectorSlug']],
-        ];
-        symbolSortKeyExpression = [
-          "case",
-          ["in", ['get', 'ID'], ["literal", ids]],
-          1,
-          0,
-        ];
-      } else {
-        ({ layer } = previousValue?.[0] ?? {});
-        iconImageExpression = ['concat', 'marker_', ['get', 'sectorSlug']];
-        symbolSortKeyExpression = 0;
-      }
-
-      if (layer) {
-        this.map.setLayoutProperty(layer, 'icon-image', iconImageExpression);
-        this.map.setLayoutProperty(layer, 'symbol-sort-key',
-          symbolSortKeyExpression);
-      }
-    },
-
     storeCenter() {
       this.moveToStorePosition();
     },
@@ -276,13 +274,24 @@ export default {
     storeZoom() {
       this.moveToStorePosition();
     },
+
+    selectedProjectSlug() {
+      // TODO add padding to map and zoom
+    },
   }
 }
 </script>
 
 <style>
+.map-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
 .map,
 .mapboxgl-map {
+  flex-grow: 1;
   height: 100%;
   width: 100%;
 }
