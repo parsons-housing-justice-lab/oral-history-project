@@ -48,6 +48,11 @@
       </Field>
       <Field>
         <h2>Popular Education</h2>
+        <RichText
+          v-if="project['Popular Education Text']"
+          class="field-value"
+          :text="project['Popular Education Text']"
+        />
         <ul class="plain-list attachment-list">
           <li
             v-for="attachment in popularEducationAttachments"
@@ -61,6 +66,11 @@
       </Field>
       <Field>
         <h2>Archive</h2>
+        <RichText
+          v-if="project['Archive Text']"
+          class="field-value"
+          :text="project['Archive Text']"
+        />
         <ul class="plain-list attachment-list">
           <li
             v-for="attachment in archiveAttachments"
