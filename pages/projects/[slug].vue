@@ -18,10 +18,6 @@
         <h2>Values, Purpose, and Methods</h2>
         <RichText class="field-value" :text="project.Goals" />
       </Field>
-      <Field v-if="project.Team">
-        <h2>Team and Collaborators</h2>
-        <RichText class="field-value" :text="project.Team" />
-      </Field>
       <Field v-if="interviews">
         <h2>Oral Histories</h2>
         <ul class="plain-list">
@@ -34,6 +30,10 @@
             </NuxtLink>
           </li>
         </ul>
+      </Field>
+      <Field v-if="project.Team">
+        <h2>Team and Collaborators</h2>
+        <RichText class="field-value" :text="project.Team" />
       </Field>
       <Field v-if="project.Themes">
         <h2>Overarching Themes</h2>
