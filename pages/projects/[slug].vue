@@ -46,7 +46,7 @@
           </li>
         </ul>
       </Field>
-      <Field>
+      <Field v-if="project['Popular Education Text'] || popularEducationAttachments.length > 0">
         <h2>Popular Education</h2>
         <RichText
           v-if="project['Popular Education Text']"
@@ -64,7 +64,7 @@
           </li>
         </ul>
       </Field>
-      <Field>
+      <Field v-if="project['Archive Text'] || archiveAttachments.length > 0">
         <h2>Archive</h2>
         <RichText
           v-if="project['Archive Text']"
