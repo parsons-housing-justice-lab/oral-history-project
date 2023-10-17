@@ -27,7 +27,7 @@ const items = [
   },
   {
     icon: 'homeless.png',
-    label: 'Homeless Organizing, Housing Coalitions, and Policy Platforms',
+    label: 'Community Organizing, Coalitions, and Policy Platforms',
   },
   {
     icon: 'rezoning.png',

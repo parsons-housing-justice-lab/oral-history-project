@@ -3,7 +3,7 @@ import combine from '@turf/combine';
 // Lower = drawn earlier
 const typeSortOrder = [
   'MHA',
-  'Housing and Homeless Organizing',
+  'Community Organizing',
   'Rezoning',
   'Tenants',
   'CLT',
