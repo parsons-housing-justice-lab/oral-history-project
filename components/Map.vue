@@ -53,7 +53,16 @@ export default {
         source: 'locations-source',
         layout: {
           'icon-allow-overlap': true,
-          'icon-image': 'CLT', // TODO conditionally
+          'icon-image': [
+            'match',
+            ['get', 'type'],
+            'CLT', 'CLT',
+            'MHA', 'MHA',
+            'Homeless Organizing', 'Homeless Organizing',
+            'Rezoning', 'Rezoning',
+            'Tenants', 'Tenants',
+            'Tenants',
+          ],
           'icon-size': [
             'interpolate', ['linear'], ['zoom'],
             12, 0.5,
@@ -197,8 +206,20 @@ export default {
           path: 'CLT.png',
         },
         {
-          name: 'CLT-Coop-MHA',
-          path: 'CLT-Coop-MHA.png',
+          name: 'MHA',
+          path: 'coops.png',
+        },
+        {
+          name: 'Homeless Organizing',
+          path: 'homeless.png',
+        },
+        {
+          name: 'Rezoning',
+          path: 'rezoning.png',
+        },
+        {
+          name: 'Tenants',
+          path: 'tenants.png',
         },
         {
           name: 'fill',

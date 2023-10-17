@@ -3,21 +3,22 @@ import combine from '@turf/combine';
 export const toGeoJson = locations => {
   return {
     type: "FeatureCollection",
-    features: locations.map(toGeoJsonFeature)
+    features: locations.map(toGeoJsonFeatures).flat() // TODO sort?
   };
 };
 
-export const toGeoJsonFeature = location => {
+export const toGeoJsonFeatures = location => {
   const properties = {
-    id: location.Id,
-    project: location.Project[0],
     type: location.Type,
   };
 
-  return {
+  const feature = {
     type: "Feature",
     id: location.Id,
-    properties,
+    properties: {
+      id: location.Id,
+      project: location.Project[0],
+    },
     geometry: {
       type: "Point",
       coordinates: [
@@ -26,6 +27,14 @@ export const toGeoJsonFeature = location => {
       ]
     }
   };
+
+  return location.Type.map(type => ({
+    ...feature,
+    properties: {
+      ...feature.properties,
+      type,
+    },
+  }));
 };
 
 export const toPolygonGeoJson = locations => {
