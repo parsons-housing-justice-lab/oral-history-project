@@ -58,7 +58,7 @@ export default {
             ['get', 'type'],
             'CLT', 'CLT',
             'MHA', 'MHA',
-            'Homeless Organizing', 'Homeless Organizing',
+            'Housing and Homeless Organizing', 'Housing and Homeless Organizing',
             'Rezoning', 'Rezoning',
             'Tenants', 'Tenants',
             'Tenants',
@@ -211,7 +211,7 @@ export default {
           path: 'coops.png',
         },
         {
-          name: 'Homeless Organizing',
+          name: 'Housing and Homeless Organizing',
           path: 'homeless.png',
         },
         {
