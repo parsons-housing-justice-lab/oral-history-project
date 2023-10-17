@@ -161,7 +161,7 @@ export default {
         layout: {
           visibility: 'none',
         },
-      }, 'locations'); // TODO before labels instead
+      }, 'road-label-simple');
     },
 
     addLocationPointsLayer() {
