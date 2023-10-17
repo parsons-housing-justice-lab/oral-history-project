@@ -67,7 +67,8 @@ export default {
             'interpolate', ['linear'], ['zoom'],
             12, 0.5,
             16, 1.5,
-          ]
+          ],
+          'symbol-sort-key': ['get', 'typeOrder'],
         },
       };
     },

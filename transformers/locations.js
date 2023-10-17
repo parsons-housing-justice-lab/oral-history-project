@@ -1,9 +1,18 @@
 import combine from '@turf/combine';
 
+// Lower = drawn earlier
+const typeSortOrder = [
+  'MHA',
+  'Homeless Organizing',
+  'Rezoning',
+  'Tenants',
+  'CLT',
+];
+
 export const toGeoJson = locations => {
   return {
     type: "FeatureCollection",
-    features: locations.map(toGeoJsonFeatures).flat() // TODO sort?
+    features: locations.map(toGeoJsonFeatures).flat()
   };
 };
 
@@ -33,6 +42,7 @@ export const toGeoJsonFeatures = location => {
     properties: {
       ...feature.properties,
       type,
+      typeOrder: typeSortOrder.indexOf(type),
     },
   }));
 };
