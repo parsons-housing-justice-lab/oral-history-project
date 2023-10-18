@@ -195,11 +195,8 @@ export default {
 
     async loadIcon(name, path) {
       return new Promise((resolve, reject) => {
-        // TODO better way to reference subdir
-        // const basepath = window.location.pathname;
-        const basepath = '/oral-history-project';
         const mapIconsPath = 'map-icons';
-        const fullpath = `${basepath}/${mapIconsPath}/${path}`;
+        const fullpath = `/${mapIconsPath}/${path}`;
         this.map.loadImage(fullpath, (error, image) => {
           if (error) return reject(error);
           if (!this.map.hasImage(name)) this.map.addImage(name, image);
