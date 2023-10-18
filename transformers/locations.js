@@ -17,16 +17,13 @@ export const toGeoJson = locations => {
 };
 
 export const toGeoJsonFeatures = location => {
-  const properties = {
-    type: location.Type,
-  };
-
-  const feature = {
+  return {
     type: "Feature",
     id: location.Id,
     properties: {
       id: location.Id,
       project: location.Project[0],
+      type: location.Type
     },
     geometry: {
       type: "Point",
@@ -36,15 +33,6 @@ export const toGeoJsonFeatures = location => {
       ]
     }
   };
-
-  return location.Type.map(type => ({
-    ...feature,
-    properties: {
-      ...feature.properties,
-      type,
-      typeOrder: typeSortOrder.indexOf(type),
-    },
-  }));
 };
 
 export const toPolygonGeoJson = locations => {
@@ -60,7 +48,7 @@ export const toPolygonGeoJsonFeature = location => {
   const properties = {
     id: location.Id,
     project: location.Project[0],
-    type: location.Type[0],
+    type: location.Type,
   };
   return {
     type: "Feature",
