@@ -60,7 +60,7 @@ export const toPolygonGeoJsonFeature = location => {
   const properties = {
     id: location.Id,
     project: location.Project[0],
-    type: location.Type,
+    type: location.Type[0],
   };
   return {
     type: "Feature",

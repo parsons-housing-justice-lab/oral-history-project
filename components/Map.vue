@@ -156,7 +156,16 @@ export default {
         type: 'fill',
         source: 'location-polygons-source',
         paint: {
-          'fill-pattern': 'fill', // TODO by feature
+          'fill-pattern': [
+            'match',
+            ['get', 'type'],
+            'CLT', 'clt-fill',
+            'MHA', 'mha-fill',
+            'Community Organizing', 'organizing-fill',
+            'Rezoning', 'rezoning-fill',
+            'Tenants', 'tenants-fill',
+            'tenants-fill',
+          ]
         },
         layout: {
           visibility: 'none',
@@ -223,8 +232,24 @@ export default {
           path: 'tenants.png',
         },
         {
-          name: 'fill',
-          path: 'fill.png',
+          name: 'clt-fill',
+          path: 'clt-fill.png',
+        },
+        {
+          name: 'mha-fill',
+          path: 'coops-fill.png',
+        },
+        {
+          name: 'organizing-fill',
+          path: 'organizing-fill.png',
+        },
+        {
+          name: 'rezoning-fill',
+          path: 'rezoning-fill.png',
+        },
+        {
+          name: 'tenants-fill',
+          path: 'tenants-fill.png',
         },
       ];
       return Promise.all(icons.map(({ name, path }) => this.loadIcon(name, path)));
