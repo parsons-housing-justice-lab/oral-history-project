@@ -56,8 +56,8 @@ export default {
           'icon-image': [
             'match',
             ['get', 'type'],
-            'CLT', 'CLT',
-            'MHA', 'MHA',
+            'Community Land Trusts and Limited Equity Housing Cooperatives', 'CLT',
+            'Neighborhood Initiatives and Campaigns', 'MHA',
             'Community Organizing', 'Community Organizing',
             'Rezoning', 'Rezoning',
             'Tenants', 'Tenants',
@@ -159,8 +159,8 @@ export default {
           'fill-pattern': [
             'match',
             ['get', 'type'],
-            'CLT', 'clt-fill',
-            'MHA', 'mha-fill',
+            'Community Land Trusts and Limited Equity Housing Cooperatives', 'clt-fill',
+            'Neighborhood Initiatives and Campaigns', 'mha-fill',
             'Community Organizing', 'organizing-fill',
             'Rezoning', 'rezoning-fill',
             'Tenants', 'tenants-fill',

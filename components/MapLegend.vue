@@ -15,11 +15,11 @@
 const items = [
   {
     icon: 'CLT.png',
-    label: 'Community Land Trusts',
+    label: 'Community Land Trusts and Limited Equity Housing Cooperatives',
   },
   {
     icon: 'coops.png',
-    label: 'Limited Equity Housing Cooperatives and Mutual Housing Associations',
+    label: 'Neighborhood Initiatives and Campaigns',
   },
   {
     icon: 'tenants.png',
