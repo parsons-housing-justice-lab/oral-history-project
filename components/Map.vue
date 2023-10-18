@@ -28,6 +28,7 @@ export default {
       style: MAPBOX_STYLE,
       hovered: false,
 
+      popup: null,
       center: INITIAL_CENTER,
       zoom: INITIAL_ZOOM,
     };
@@ -122,6 +123,11 @@ export default {
         projection: 'naturalEarth',
       });
 
+      this.popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+      });
+
       map.on('load', this.mapLoaded);
       map.on('click', ['locations'], this.handleClick);
       map.on('mouseenter', ['locations'], this.handleMouseEnter);
@@ -206,7 +212,6 @@ export default {
     },
 
     async loadIcons() {
-      // TODO add other icons
       const icons = [
         {
           name: 'CLT',
@@ -267,7 +272,16 @@ export default {
       if (feature) {
         const layer = feature.layer.id;
         const id = feature.id;
-        // TODO tooltip
+
+        const project = this.projects
+          .find(({ id }) => id === feature.properties.project);
+        if (project) {
+          const coordinates = feature.geometry.coordinates.slice();
+          this.popup
+            .setLngLat(coordinates)
+            .setHTML(project.Name)
+            .addTo(this.map);
+        }
 
         this.map.setFilter('location-polygons', 
           ['==', ['get', 'project'], feature.properties.project],
@@ -281,6 +295,7 @@ export default {
     handleMouseLeave() {
       this.map.setFilter('location-polygons', null);
       this.map.setLayoutProperty('location-polygons', 'visibility', 'none');
+      this.popup.remove();
       this.hovered = false;
     },
 
@@ -338,6 +353,13 @@ export default {
   flex-grow: 1;
   height: 100%;
   width: 100%;
+}
+
+.mapboxgl-popup-content {
+  padding: 5px;
+  font-family: var(--main-font-family);
+  color: var(--color-dark-gray);
+  max-width: 150px;
 }
 
 .map.hovered {
