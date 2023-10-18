@@ -4,7 +4,7 @@
     <div class="items">
       <div class="item" v-for="item in items" :key="item.icon">
         <!-- TODO fix -->
-        <img :src="`/oral-history-project/map-icons/${item.icon}`" />
+        <img :src="`/map-icons/${item.icon}`" />
         <span>{{ item.label }}</span>
       </div>
     </div>
