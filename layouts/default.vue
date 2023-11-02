@@ -1,16 +1,20 @@
 <template>
   <main>
     <Head>
-      <Title>{{ title }} {{ route.path }}</Title>
+      <Title>{{ title }}</Title>
     </Head>
 
     <ClientOnly>
-      <Map />
+      <Map :padding="mapPadding" />
     </ClientOnly>
 
-    <Sidebar />
+    <Sidebar ref="sidebarRef" />
 
-    <div class="content" v-show="welcomeShown || route.path !== '/'">
+    <div
+      class="content"
+      v-show="welcomeShown || route.path !== '/'"
+      ref="contentRef"
+    >
       <div
         class="welcome-close"
         v-if="route.path === '/'"
@@ -22,8 +26,9 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { storeToRefs } from 'pinia';
+import { useResizeObserver } from '@vueuse/core';
 import { useLocationsStore } from '@/store/locations';
 import { useTextBlocksStore } from '@/store/textBlocks';
 import { useWelcomeStore } from '@/store/welcome';
@@ -43,6 +48,27 @@ const textBlocksStore = useTextBlocksStore();
 const welcomeStore = useWelcomeStore();
 
 const route = useRoute();
+
+const contentRef = ref(null);
+const contentWidth = ref(0);
+
+const sidebarRef = ref(null);
+const sidebarWidth = ref(0);
+
+const mapPadding = computed(() => ({
+  left: sidebarWidth.value,
+  right: contentWidth.value,
+}));
+
+useResizeObserver(contentRef, (entries) => {
+  const entry = entries[0];
+  contentWidth.value = entry.contentRect.width;
+});
+
+useResizeObserver(sidebarRef, (entries) => {
+  const entry = entries[0];
+  sidebarWidth.value = entry.contentRect.width;
+});
 
 onMounted(() => {
   locationsStore.loadLocations();

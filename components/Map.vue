@@ -34,6 +34,10 @@ export default {
     };
   },
 
+  props: {
+    padding: Object,
+  },
+
   mounted() {
     mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
     this.$nextTick(() => this.initializeMap());
@@ -122,6 +126,8 @@ export default {
         zoom: this.zoom,
         projection: 'naturalEarth',
       });
+
+      map.setPadding(this.padding);
 
       this.popup = new mapboxgl.Popup({
         closeButton: false,
@@ -326,6 +332,11 @@ export default {
   },
 
   watch: {
+    padding() {
+      if (!this.map) return;
+      this.map.setPadding(this.padding);
+    },
+
     storeCenter() {
       this.moveToStorePosition();
     },

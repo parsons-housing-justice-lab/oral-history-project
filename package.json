@@ -21,6 +21,7 @@
   "dependencies": {
     "@pinia/nuxt": "^0.4.7",
     "@turf/combine": "^6.5.0",
+    "@vueuse/core": "^10.5.0",
     "airtable": "^0.11.6",
     "mapbox-gl": "^2.13.0",
     "pinia": "^2.0.33",
