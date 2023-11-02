@@ -127,8 +127,6 @@ export default {
         projection: 'naturalEarth',
       });
 
-      map.setPadding(this.padding);
-
       this.popup = new mapboxgl.Popup({
         closeButton: false,
         closeOnClick: false
@@ -203,6 +201,8 @@ export default {
       await this.loadIcons();
       this.addLocationPointsLayer();
       this.addLocationPolygonsLayer();
+
+      this.map.setPadding(this.padding);
     },
 
     async loadIcon(name, path) {
