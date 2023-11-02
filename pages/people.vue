@@ -59,8 +59,15 @@ ol {
   display: inline;
 }
 
+.collaborators-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .collaborator-item .name {
   margin-right: 0.5rem;
+  font-weight: bold;
 }
 
 section {
