@@ -1,7 +1,7 @@
 <template>
   <main>
     <Head>
-      <Title>{{ title }}</Title>
+      <Title>{{ title }} {{ route.path }}</Title>
     </Head>
 
     <ClientOnly>
@@ -10,19 +10,20 @@
 
     <Sidebar />
 
-    <div class="content" v-if="showContent">
+    <div class="content" v-show="welcomeShown || route.path !== '/'">
       <div
         class="welcome-close"
-        v-if="showWelcomeClose"
-        @click="hideWelcome()"
+        v-if="route.path === '/'"
+        @click="welcomeShown = false"
       >&times;</div>
       <slot />
     </div>
   </main>
 </template>
 
-<script>
-import { mapActions, mapState } from 'pinia';
+<script setup>
+import { onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
 import { useLocationsStore } from '@/store/locations';
 import { useTextBlocksStore } from '@/store/textBlocks';
 import { useWelcomeStore } from '@/store/welcome';
@@ -32,54 +33,29 @@ import { useProjectAttachmentsStore } from '@/store/projectAttachments';
 import { useInterviewsStore } from '@/store/interviews';
 import { useProjectsStore } from '@/store/projects';
 
-export default {
-  name: 'IndexPage',
+const interviewsStore = useInterviewsStore();
+const locationsStore = useLocationsStore();
+const pagesStore = usePagesStore();
+const peopleStore = usePeopleStore();
+const projectAttachmentsStore = useProjectAttachmentsStore();
+const projectsStore = useProjectsStore();
+const textBlocksStore = useTextBlocksStore();
+const welcomeStore = useWelcomeStore();
 
-  async mounted() {
-    this.loadLocations();
-    this.loadTextBlocks();
-    this.loadPages();
-    this.loadPeople();
-    this.loadProjects();
-    this.loadProjectAttachments();
-    this.loadInterviews();
-    /*
-    const params = this.$route.query;
-    this.$store.dispatch('map/loadQueryParams', { params });
-    */
-  },
+const route = useRoute();
 
-  computed: {
-    ...mapState(useTextBlocksStore, {
-      title: store => store.byType('Title')[0],
-    }),
+onMounted(() => {
+  locationsStore.loadLocations();
+  textBlocksStore.loadTextBlocks();
+  pagesStore.loadPages();
+  peopleStore.loadPeople();
+  projectsStore.loadProjects();
+  projectAttachmentsStore.loadProjectAttachments();
+  interviewsStore.loadInterviews();
+});
 
-    ...mapState(useWelcomeStore, {
-      welcomeHidden: store => {
-        return !store.show;
-      },
-    }),
-
-    showContent() {
-      return !this.welcomeHidden || this.$route.path !== '/';
-    },
-
-    showWelcomeClose() {
-      return this.$route.path === '/';
-    },
-  },
-
-  methods: {
-    ...mapActions(useTextBlocksStore, ['loadTextBlocks']),
-    ...mapActions(usePagesStore, ['loadPages']),
-    ...mapActions(useInterviewsStore, ['loadInterviews']),
-    ...mapActions(usePeopleStore, ['loadPeople']),
-    ...mapActions(useProjectsStore, ['loadProjects']),
-    ...mapActions(useProjectAttachmentsStore, ['loadProjectAttachments']),
-    ...mapActions(useLocationsStore, ['loadLocations']),
-    ...mapActions(useWelcomeStore, { hideWelcome: 'toggleHide' }),
-  },
-}
+const title = computed(() => textBlocksStore.byType('Title')[0]);
+const { show: welcomeShown } = storeToRefs(welcomeStore);
 </script>
 
 <style scoped>
