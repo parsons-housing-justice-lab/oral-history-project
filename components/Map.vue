@@ -337,6 +337,18 @@ export default {
       this.map.setPadding(this.padding);
     },
 
+    locationPointsGeoJson() {
+      if (!this.map) return;
+      this.addLocationPointsSource();
+      this.addLocationPointsLayer();
+    },
+
+    locationPolygonsGeoJson() {
+      if (!this.map) return;
+      this.addLocationPolygonsSource();
+      this.addLocationPolygonsLayer();
+    },
+
     storeCenter() {
       this.moveToStorePosition();
     },
