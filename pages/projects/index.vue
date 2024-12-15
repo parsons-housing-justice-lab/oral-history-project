@@ -4,6 +4,9 @@
     <PageSections name="Oral History Projects" />
     <div class="filters">
       <div class="filters-row">
+        <input v-model="searchInput" type="search" placeholder="Search within oral histories" />
+      </div>
+      <div class="filters-row">
         <select v-model="selectedTheme">
           <option value="">search by theme</option>
           <option
@@ -22,9 +25,6 @@
             {{ category }}
           </option>
         </select>
-      </div>
-      <div>
-        <input v-model="searchInput" type="search" placeholder="Search within oral histories" />
       </div>
     </div>
     <div>
@@ -117,6 +117,7 @@ input[type="search"] {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .filters-row {
