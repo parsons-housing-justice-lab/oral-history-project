@@ -33,15 +33,7 @@ const searchByField = (objs, field, queryText) => {
   return matches;
 };
 
-export const searchProjects = (projects, interviews, queryText) => {
-  const matches = [
-    ...searchByField(interviews, 'Name', queryText),
-    ...searchByField(interviews, 'Description', queryText),
-    ...searchByField(interviews, 'Transcription', queryText),
-  ];
-
-  const groupedMatches = groupBy(matches, i => i.index);
-
+const groupMatchingInterviews = (groupedMatches, projects, interviews) => {
   const matchingInterviews = Object.entries(groupedMatches)
     .map(([index, matches]) => {
       const interview = interviews[index];
@@ -52,12 +44,28 @@ export const searchProjects = (projects, interviews, queryText) => {
       };
     });
 
-  const byProject = projects.map(project => {
+  return projects.map(project => {
     return {
       id: project.Id,
       interviews: matchingInterviews.filter(m => m.projects.includes(project.id)),
     };
   });
+};
 
-  return byProject;
+export const getNullSearch = (projects, interviews) => {
+  const nullSearch = Object.fromEntries(
+    interviews.map((interview, i) => ([i, []]))
+  );
+  return groupMatchingInterviews(nullSearch, projects, interviews);
+};
+
+export const searchProjects = (projects, interviews, queryText) => {
+  const matches = [
+    ...searchByField(interviews, 'Name', queryText),
+    ...searchByField(interviews, 'Description', queryText),
+    ...searchByField(interviews, 'Transcription', queryText),
+  ];
+
+  const groupedMatches = groupBy(matches, i => i.index);
+  return groupMatchingInterviews(groupedMatches, projects, interviews);
 };

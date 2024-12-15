@@ -5,16 +5,18 @@
       :key="project.id"
       :project-id="project.id"
       :interviews="project.interviews"
+      :search-active="searchActive"
     />
   </div>
 </template>
 
 <script setup>
 const props = defineProps({
+  searchActive: Boolean,
   results: Array,
 });
 
-const { results } = toRefs(props);
+const { results, searchActive } = toRefs(props);
 </script>
 
 <style scoped>

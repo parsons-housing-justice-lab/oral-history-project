@@ -2,11 +2,11 @@
   <div class="search-results-project">
     <span class="title">
       <NuxtLink :to="`/projects/${project.Slug}`">{{ project.Name }}</NuxtLink>
-      <div class="results-count">
+      <div v-if="searchActive" class="results-count">
         {{ interviews.length }} results
       </div>
     </span>
-    <div v-if="interviewsToShow.length > 0" class="interviews-list">
+    <div v-if="searchActive && interviewsToShow.length > 0" class="interviews-list">
       <SearchResultsInterview
         v-for="interview in interviewsToShow"
         :key="interview.id"
@@ -15,8 +15,10 @@
         :project-slug="project.Slug"
       />
     </div>
-    <button v-if="couldExpand" class="expand-toggle" @click="expanded = true">show more</button>
-    <button v-if="couldCollapse" class="expand-toggle" @click="expanded = false">show less</button>
+    <template v-if="searchActive">
+      <button v-if="couldExpand" class="expand-toggle" @click="expanded = true">show more</button>
+      <button v-if="couldCollapse" class="expand-toggle" @click="expanded = false">show less</button>
+    </template>
   </div>
 </template>
 
@@ -27,10 +29,11 @@ const projectsStore = useProjectsStore();
 
 const props = defineProps({
   projectId: Number,
+  searchActive: Boolean,
   interviews: Array,
 });
 
-const { projectId, interviews } = toRefs(props);
+const { projectId, searchActive, interviews } = toRefs(props);
 
 const expanded = ref(false);
 const collapsedCount = 3;
@@ -52,7 +55,7 @@ const couldCollapse = computed(() => expanded.value && (interviews.value.length 
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 .title {

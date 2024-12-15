@@ -24,11 +24,11 @@
         </select>
       </div>
       <div>
-        <input v-model="searchInput" type="search" placeholder="search oral histories" />
+        <input v-model="searchInput" type="search" placeholder="Search within oral histories" />
       </div>
     </div>
     <div>
-      <SearchResults :results="searchResults" />
+      <SearchResults :search-active="searchInput.length >= 3" :results="searchResults" />
     </div>
   </div>
 </template>
@@ -40,7 +40,6 @@ import { useProjectsStore } from '@/store/projects';
 const selectedTheme = ref('');
 const selectedCategory = ref('');
 const searchInput = ref('');
-const searchResults = ref([]);
 
 const interviewsStore = useInterviewsStore();
 const projectsStore = useProjectsStore();
@@ -80,11 +79,13 @@ const categories = computed(() => {
     .sort((a, b) => a.localeCompare(b));
 });
 
-watch(searchInput, (searchInput) => {
-  if (searchInput.length < 3) searchResults.value = [];
-  else {
-    searchResults.value = searchProjects(projects.value, interviews.value, searchInput);
-  }
+const searchResults = computed(() => {
+  if (searchInput.value.length < 3) return getNullSearch(filteredProjects.value,
+    interviews.value);
+
+  // TODO if too many results, add message 
+
+  return searchProjects(filteredProjects.value, interviews.value, searchInput.value);
 });
 </script>
 
@@ -104,6 +105,12 @@ select {
   color: white;
   padding: 0.5rem;
   border: none;
+}
+
+input[type="search"] {
+  font-size: 1.1em;
+  padding: 0.25em;
+  width: 50%;
 }
 
 .filters {
