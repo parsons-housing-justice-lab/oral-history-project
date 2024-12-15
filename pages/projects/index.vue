@@ -27,8 +27,11 @@
         </select>
       </div>
     </div>
+    <div class="too-generic-message" v-if="searchInput.length >= 3 && mostInterviewsInSearchResults">
+      This query matched most of the interviews, try something more specific.
+    </div>
     <div>
-      <SearchResults :search-active="searchInput.length >= 3" :results="searchResults" />
+      <SearchResults :search-active="searchInput.length >= 3 && !mostInterviewsInSearchResults" :results="preparedSearchResults" />
     </div>
   </div>
 </template>
@@ -79,13 +82,23 @@ const categories = computed(() => {
     .sort((a, b) => a.localeCompare(b));
 });
 
+const nullSearch = computed(() => {
+  return getNullSearch(filteredProjects.value, interviews.value);
+});
+
 const searchResults = computed(() => {
-  if (searchInput.value.length < 3) return getNullSearch(filteredProjects.value,
-    interviews.value);
-
-  // TODO if too many results, add message 
-
+  if (searchInput.value.length < 3) return nullSearch.value;
   return searchProjects(filteredProjects.value, interviews.value, searchInput.value);
+});
+
+const mostInterviewsInSearchResults = computed(() => {
+  const searchResultsInterviewCount = searchResults.value
+    .map(({ interviews }) => interviews).flat().length;
+  return searchResultsInterviewCount >= (interviews.value.length * .97);
+});
+
+const preparedSearchResults = computed(() => {
+  return mostInterviewsInSearchResults.value ? nullSearch.value : searchResults.value;
 });
 </script>
 
@@ -124,5 +137,11 @@ input[type="search"] {
   display: flex;
   flex-direction: row;
   gap: 2rem;
+}
+
+.too-generic-message {
+  font-size: 0.9em;
+  margin-bottom: 1rem;
+  font-style: italic;
 }
 </style>
