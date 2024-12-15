@@ -1,42 +1,63 @@
 import uFuzzy from '@leeoniya/ufuzzy';
+import { groupBy } from 'es-toolkit';
+import { getExcerpt } from './get-excerpt';
 
-const searchProjectTitles = (projects, queryText) => {
+const searchByField = (objs, field, queryText) => {
   const uf = new uFuzzy({});
-  const projectTitles = projects.map(p => p.Name);
+  const fieldValues = objs.map(o => o[field]);
 
-  const idxs = uf.filter(projectTitles, queryText);
+  const [idxs, info, order] = uf.search(fieldValues, queryText);
 
-  // TODO more generic
-  if (idxs != null && idxs.length > 0) {
-    let info = uf.info(idxs, projectTitles, queryText);
+  if (idxs == null || idxs.length === 0) return [];
 
-    // order is a double-indirection array (a re-order of the passed-in idxs)
-    // this allows corresponding info to be grabbed directly by idx, if needed
-    let order = uf.sort(info, projectTitles, queryText);
+  const matches = order.map(i => {
+    const index = info.idx[i];
+    const value = fieldValues[info.idx[i]];
+    const ranges = info.ranges[i];
 
-    // render post-filtered & ordered matches
-    // TODO return indices instead
-    for (let i = 0; i < order.length; i++) {
-      // using info.idx here instead of idxs because uf.info() may have
-      // further reduced the initial idxs based on prefix/suffix rules
-      console.log(info.idx[order[i]], projectTitles[info.idx[order[i]]]);
-    }
-  }
-  else {
-    // render pre-filtered but unordered matches
-    for (let i = 0; i < idxs.length; i++) {
-      console.log(projectTitles[idxs[i]]);
-    }
-  }
+    const { excerpt, min, max } = getExcerpt(value, ranges[0], ranges.slice(-1)[0]);
+    let highlighted = uFuzzy.highlight(excerpt, ranges.map(v => v - min)).trim();
+
+    if (min > 0) highlighted = '[...] ' + highlighted;
+    if (max < value.length) highlighted = highlighted + ' [...]';
+
+    return {
+      index,
+      field,
+      highlighted,
+      excerpt,
+      min, 
+    };
+  });
+  
+  return matches;
 };
 
 export const searchProjects = (projects, interviews, queryText) => {
-  console.log(projects, interviews, queryText);
-  searchProjectTitles(projects, queryText);
+  const matches = [
+    ...searchByField(interviews, 'Name', queryText),
+    ...searchByField(interviews, 'Description', queryText),
+    ...searchByField(interviews, 'Transcription', queryText),
+  ];
 
-  // TODO search interviews, bundle results for display
-  //  * name
-  //  * description
-  //  * transcription
-  return [];
+  const groupedMatches = groupBy(matches, i => i.index);
+
+  const matchingInterviews = Object.entries(groupedMatches)
+    .map(([index, matches]) => {
+      const interview = interviews[index];
+      return {
+        id: interview.Id,
+        projects: interview.Projects,
+        matches,
+      };
+    });
+
+  const byProject = projects.map(project => {
+    return {
+      id: project.Id,
+      interviews: matchingInterviews.filter(m => m.projects.includes(project.id)),
+    };
+  });
+
+  return byProject;
 };

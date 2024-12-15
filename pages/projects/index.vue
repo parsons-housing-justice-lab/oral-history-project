@@ -28,40 +28,7 @@
       </div>
     </div>
     <div>
-      <ul>
-        <li
-          v-for="project in filteredProjects"
-          :key="project.Slug"
-          class="project"
-        >
-          <span class="title">
-            <NuxtLink :to="`/projects/${project.Slug}`">{{ project.Name }}</NuxtLink>
-          </span>
-          <div class="details" v-if="project.Name === 'Sunset Park is Not for Sale' && searchInput === 'rezoning'">
-            <ul>
-              <li>
-                <span class="interview">
-                  <NuxtLink
-                    to="/projects/sunset-park-is-not-for-sale-12/interviews/marcela-mitaynes-59">Marcela
-                    Mitaynes</NuxtLink>
-                </span>
-                <div class="preview">
-                  <div class="transcription-matches">
-                    <ul>
-                      <li>
-                        "[...] Talking about these big or more recent prices in the community, can you tell us a little bit about <strong>rezonings</strong> in the community? [...]"
-                      </li>
-                      <li>
-                        "[...] And I think that we knew the <strong>rezoning</strong> was coming. [...]"
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
+      <SearchResults :results="searchResults" />
     </div>
   </div>
 </template>
@@ -139,12 +106,6 @@ select {
   border: none;
 }
 
-.project .title {
-  font-weight: bold;
-  font-size: 1.25em;
-  text-decoration: underline;
-}
-
 .filters {
   display: flex;
   flex-direction: column;
@@ -155,29 +116,5 @@ select {
   display: flex;
   flex-direction: row;
   gap: 2rem;
-}
-
-.preview {
-  margin-bottom: 1em;
-}
-
-.details ul {
-  margin: 0;
-  padding: 0;
-  margin-left: 1em;
-  margin-top: 0.25em;
-}
-
-.details .interview a {
-  text-decoration: underline;
-}
-
-.transcription-matches {
-  margin-left: 1em;
-}
-
-.transcription-matches ul {
-  list-style: disc;
-  padding-left: 0.5em;
 }
 </style>

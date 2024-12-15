@@ -7,8 +7,11 @@ export const useProjectsStore = defineStore('projects', {
   }),
 
   getters: {
-    byId: state => id => state.projects
-      .filter(({ Id }) => '' + Id === id),
+    byId: state => id => {
+      let searchId = id;
+      if (typeof searchId === 'number') searchId += '';
+      return state.projects.filter(({ Id }) => '' + Id === searchId);
+    },
 
     bySlug: state => slug => state.projects
       .filter(({ Slug }) => Slug === slug),
