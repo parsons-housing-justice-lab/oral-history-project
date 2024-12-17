@@ -27,7 +27,7 @@
             class="interview-item"
           >
             <NuxtLink :to="`/projects/${project.Slug}/interviews/${interview.Slug}`">
-              <img :src="interview.Photo[0].thumbnails.small.url" />
+              <img :src="interview.Photo[0].thumbnails.large.url" />
               {{ interview.Name }}
             </NuxtLink>
           </li>
@@ -177,26 +177,33 @@ h1 {
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-.long-list {
-  column-count: 2;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .interview-item {
   margin: 0.5rem 0;
+  width: 7rem;
 }
 
 .interview-item img {
-  width: 2rem;
+  aspect-ratio: 1;
+  filter: grayscale(1);
+  object-fit: cover;
+  transition: filter 0.25s;
+}
+
+.interview-item img:hover {
+  filter: grayscale(0);
 }
 
 .interview-item a {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 1.05em;
-  gap: 0.5rem;
+  flex-direction: column;
+  font-size: 0.9em;
+  gap: 0.1rem;
   text-decoration: underline;
 }
 
