@@ -3,7 +3,9 @@ import { groupBy } from 'es-toolkit';
 import { getExcerpt } from './get-excerpt';
 
 const searchByField = (objs, field, queryText) => {
-  const uf = new uFuzzy({});
+  const uf = new uFuzzy({
+    interIns: 20,
+  });
   const fieldValues = objs.map(o => o[field]);
 
   const [idxs, info, order] = uf.search(fieldValues, queryText);
