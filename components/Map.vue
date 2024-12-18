@@ -151,12 +151,12 @@ export default {
     },
 
     addLocationPolygonsSource() {
-      const existingSource = this.map.getSource('locations-polygons-source');
-      if (existingSource) {
-        existingSource.setData(this.locationPolygonsGeoJson);
-      }
-      else {
+      try {
         this.map.addSource('location-polygons-source', this.locationPolygonsSource);
+      }
+      catch (e) {
+        this.map.getSource('locations-polygons-source')
+          .setData(this.locationPolygonsGeoJson);
       }
     },
 
