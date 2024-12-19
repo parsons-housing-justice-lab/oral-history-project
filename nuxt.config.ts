@@ -31,4 +31,6 @@ export default defineNuxtConfig({
       'PT+Sans': [400, 700],
     },
   },
+
+  compatibilityDate: '2024-12-18',
 })
