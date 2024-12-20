@@ -14,22 +14,28 @@
         <h2>About</h2>
         <RichText class="field-value" :text="project.About" />
       </Field>
-      <Field v-if="project.Goals">
-        <h2>Values, Purpose, and Methods</h2>
-        <RichText class="field-value" :text="project.Goals" />
-      </Field>
       <Field v-if="interviews">
         <h2>Oral Histories</h2>
-        <ul class="plain-list">
+        <ul :class="{
+          'plain-list': true,
+          'interview-list': true,
+          'long-list': interviews.length > 10,
+        }">
           <li
             v-for="interview in interviews"
             :key="interview.Slug"
+            class="interview-item"
           >
             <NuxtLink :to="`/projects/${project.Slug}/interviews/${interview.Slug}`">
+              <img :src="interview.Photo[0].thumbnails.large.url" />
               {{ interview.Name }}
             </NuxtLink>
           </li>
         </ul>
+      </Field>
+      <Field v-if="project.Goals">
+        <h2>Values, Purpose, and Methods</h2>
+        <RichText class="field-value" :text="project.Goals" />
       </Field>
       <Field v-if="project.Team">
         <h2>Team and Collaborators</h2>
@@ -98,8 +104,6 @@
         </div>
       </Field>
     </FieldColumn>
-
-    <!-- TODO add other custom sections -->
   </div>
 </template>
 
@@ -173,6 +177,37 @@ h1 {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.interview-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.interview-item {
+  margin: 0.5rem 0;
+  width: 8rem;
+}
+
+.interview-item img {
+  aspect-ratio: 1;
+  filter: grayscale(1);
+  object-fit: cover;
+  transition: filter 0.25s;
+}
+
+.interview-item img:hover {
+  filter: grayscale(0);
+}
+
+.interview-item a {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9em;
+  gap: 0.1rem;
+  text-decoration: underline;
 }
 
 .attachment-list {
