@@ -7,8 +7,11 @@ export const useInterviewsStore = defineStore('interviews', {
   }),
 
   getters: {
-    byId: state => id => state.interviews
-      .filter(({ Id }) => '' + Id === id),
+    byId: state => id => {
+      let searchId = id;
+      if (typeof searchId === 'number') searchId += '';
+      return state.interviews.filter(({ Id }) => '' + Id === searchId);
+    },
 
     bySlug: state => slug => state.interviews
       .filter(({ Slug }) => Slug === slug),

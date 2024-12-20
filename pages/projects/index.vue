@@ -3,46 +3,51 @@
     <h1>Oral History Projects</h1>
     <PageSections name="Oral History Projects" />
     <div class="filters">
-      <select v-model="selectedTheme">
-        <option value="">search by theme</option>
-        <option
-          v-for="theme in themes"
-          :key="theme"
-        >
-          {{ theme }}
-        </option>
-      </select>
-      <select v-model="selectedCategory">
-        <option value="">search by category</option>
-        <option
-          v-for="category in categories"
-          :key="category"
-        >
-          {{ category }}
-        </option>
-      </select>
+      <div class="filters-row">
+        <input v-model="searchInput" type="search" placeholder="Search within oral histories" />
+      </div>
+      <div class="filters-row">
+        <select v-model="selectedTheme">
+          <option value="">search by theme</option>
+          <option
+            v-for="theme in themes"
+            :key="theme"
+          >
+            {{ theme }}
+          </option>
+        </select>
+        <select v-model="selectedCategory">
+          <option value="">search by category</option>
+          <option
+            v-for="category in categories"
+            :key="category"
+          >
+            {{ category }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="too-generic-message" v-if="searchInput.length >= 3 && mostInterviewsInSearchResults">
+      This query matched most of the interviews, try something more specific.
     </div>
     <div>
-      <ul>
-        <li
-          v-for="project in filteredProjects"
-          :key="project.Slug"
-        >
-          <NuxtLink :to="`/projects/${project.Slug}`">{{ project.Name }}</NuxtLink>
-        </li>
-      </ul>
+      <SearchResults :search-active="searchInput.length >= 3 && !mostInterviewsInSearchResults" :results="preparedSearchResults" />
     </div>
   </div>
 </template>
 
 <script setup>
+import { useInterviewsStore } from '@/store/interviews';
 import { useProjectsStore } from '@/store/projects';
 
 const selectedTheme = ref('');
 const selectedCategory = ref('');
+const searchInput = ref('');
 
+const interviewsStore = useInterviewsStore();
 const projectsStore = useProjectsStore();
 
+const interviews = computed(() => interviewsStore.interviews);
 const projects = computed(() => projectsStore.projects);
 
 const filteredProjects = computed(() => {
@@ -76,6 +81,25 @@ const categories = computed(() => {
   return [...new Set(allCategories)]
     .sort((a, b) => a.localeCompare(b));
 });
+
+const nullSearch = computed(() => {
+  return getNullSearch(filteredProjects.value, interviews.value);
+});
+
+const searchResults = computed(() => {
+  if (searchInput.value.length < 3) return nullSearch.value;
+  return searchProjects(filteredProjects.value, interviews.value, searchInput.value);
+});
+
+const mostInterviewsInSearchResults = computed(() => {
+  const searchResultsInterviewCount = searchResults.value
+    .map(({ interviews }) => interviews).flat().length;
+  return searchResultsInterviewCount >= (interviews.value.length * .97);
+});
+
+const preparedSearchResults = computed(() => {
+  return mostInterviewsInSearchResults.value ? nullSearch.value : searchResults.value;
+});
 </script>
 
 <style scoped>
@@ -96,9 +120,28 @@ select {
   border: none;
 }
 
+input[type="search"] {
+  font-size: 1.1em;
+  padding: 0.25em;
+  width: 50%;
+}
+
 .filters {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.filters-row {
   display: flex;
   flex-direction: row;
   gap: 2rem;
+}
+
+.too-generic-message {
+  font-size: 0.9em;
+  margin-bottom: 1rem;
+  font-style: italic;
 }
 </style>
