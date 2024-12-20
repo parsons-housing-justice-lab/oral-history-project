@@ -177,6 +177,9 @@ h1 {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.interview-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
