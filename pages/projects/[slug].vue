@@ -185,7 +185,7 @@ h1 {
 
 .interview-item {
   margin: 0.5rem 0;
-  width: 7rem;
+  width: 8rem;
 }
 
 .interview-item img {
