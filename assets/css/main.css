@@ -27,6 +27,10 @@ h2 {
   font-size: 1.25em;
 }
 
+h3 {
+  font-size: 1.1em;
+}
+
 button {
   font-family: var(--main-font-family);
 }
