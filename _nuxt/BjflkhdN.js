@@ -1,0 +1,1 @@
+import{_ as t}from"./l0qMXt1k.js";import{_ as n,e as r,o as e}from"./L39PVerc.js";import"./CVUBOrwf.js";import"./Y9sJiLD5.js";import"./CEsQoeT9.js";const s={};function c(a,_){const o=t;return e(),r(o,{name:"Using this Platform"})}const u=n(s,[["render",c]]);export{u as default};
