@@ -1,1 +1,0 @@
-import{z as a}from"./L39PVerc.js";import{f as c}from"./CEsQoeT9.js";const o=a("projectAttachments",{state:()=>({projectAttachments:[]}),getters:{byProject:e=>s=>e.projectAttachments.filter(({Project:t})=>t==null?void 0:t.includes(s))??!1},actions:{async loadProjectAttachments(){this.projectAttachments.length>0||(this.projectAttachments=await c())}}});export{o as u};

@@ -1,1 +1,0 @@
-import{o as r,c as n}from"./L39PVerc.js";const c=["innerHTML"],i={__name:"RichText",props:{text:String},setup(e){return(t,o)=>(r(),n("div",{class:"rich-text",innerHTML:t.$mdRenderer.render(e.text||"")},null,8,c))}};export{i as _};
