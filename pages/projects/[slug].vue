@@ -79,6 +79,11 @@
         </Field>
         <Field v-if="archiveAttachments.length > 0">
           <h3>Reports</h3>
+          <RichText
+            v-if="project['Reports Text']"
+            class="field-value"
+            :text="project['Reports Text']"
+          />
           <ul class="plain-list attachment-list">
             <li
               v-for="attachment in archiveAttachments"
