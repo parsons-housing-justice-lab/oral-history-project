@@ -1,4 +1,4 @@
-import uFuzzy from '@leeoniya/ufuzzy/dist/uFuzzy.esm.js';
+import uFuzzy from '@leeoniya/ufuzzy';
 import { groupBy } from 'es-toolkit';
 import { getExcerpt } from './get-excerpt';
 
