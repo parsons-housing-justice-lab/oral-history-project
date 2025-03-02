@@ -64,7 +64,7 @@
             v-for="attachment in popularEducationAttachments"
             :key="attachment.id"
           >
-            <a :href="attachment.File[0].url" target="_blank">
+            <a class="attachment-link" @click="selectedPdf = attachment.File[0]">
               <img :src="attachment.File[0].thumbnails.large.url" />
             </a>
           </li>
@@ -82,7 +82,7 @@
             v-for="attachment in archiveAttachments"
             :key="attachment.id"
           >
-            <a :href="attachment.File[0].url" target="_blank">
+            <a class="attachment-link" @click="selectedPdf = attachment.File[0]">
               <img :src="attachment.File[0].thumbnails.large.url" />
             </a>
           </li>
@@ -104,51 +104,49 @@
         </div>
       </Field>
     </FieldColumn>
+
+    <pdf-modal
+      v-if="selectedPdf"
+      @close="selectedPdf = null"
+      :title="selectedPdf.filename"
+      :url="selectedPdf.url"
+    />
   </div>
 </template>
 
-<script>
-import { mapState } from 'pinia';
+<script setup>
 import { useInterviewsStore } from '@/store/interviews';
 import { useProjectsStore } from '@/store/projects';
 import { useProjectAttachmentsStore } from '@/store/projectAttachments';
 
-export default {
-  computed: {
-    ...mapState(useProjectsStore, {
-      projectBySlug: 'bySlug',
-    }),
+const selectedPdf = ref(null);
+const route = useRoute();
+const interviewsStore = useInterviewsStore();
+const projectsStore = useProjectsStore();
+const projectAttachmentsStore = useProjectAttachmentsStore();
 
-    ...mapState(useInterviewsStore, {
-      interviewsByProject: 'byProject',
-    }),
+const project = computed(() => {
+  return projectsStore.bySlug(route.params.slug)?.[0] ?? {};
+});
 
-    ...mapState(useProjectAttachmentsStore, {
-      attachmentsByProject: 'byProject',
-    }),
+const attachments = computed(() => {
+  if (!project.value) return [];
+  return projectAttachmentsStore.byProject(project.value.id);
+});
 
-    attachments() {
-      return this.attachmentsByProject(this.project.id);
-    },
+const interviews = computed(() => {
+  if (!project.value) return [];
+  return interviewsStore.byProject(project.value.id);
+});
 
-    archiveAttachments() {
-      return this.attachments.filter(({ Section }) => Section === 'Archive');
-    },
+const archiveAttachments = computed(() => {
+  return attachments.value.filter(({ Section }) => Section === 'Archive');
+});
 
-    popularEducationAttachments() {
-      return this.attachments
-        .filter(({ Section }) => Section === 'Popular Education');
-    },
-
-    interviews() {
-      return this.interviewsByProject(this.project.id);
-    },
-
-    project() {
-      return this.projectBySlug(this.$route.params.slug)?.[0] ?? {};
-    },
-  },
-}
+const popularEducationAttachments = computed(() => {
+  return attachments.value
+    .filter(({ Section }) => Section === 'Popular Education');
+});
 </script>
 
 <style scoped>
@@ -228,5 +226,9 @@ h1 {
 img {
   max-width: 100%;
   max-height: 25rem;
+}
+
+.attachment-link {
+  cursor: pointer;
 }
 </style>
