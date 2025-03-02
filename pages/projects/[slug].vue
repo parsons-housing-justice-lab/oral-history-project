@@ -245,7 +245,12 @@ img {
   max-height: 25rem;
 }
 
+.archive-section h3 {
+  margin-bottom: 0;
+}
+
 .archive-section .field {
+  padding-top: 1rem;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid black;
