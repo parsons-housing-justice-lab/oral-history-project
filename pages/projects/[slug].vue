@@ -52,41 +52,49 @@
           </li>
         </ul>
       </Field>
-      <Field v-if="project['Popular Education Text'] || popularEducationAttachments.length > 0">
-        <h2>Popular Education</h2>
-        <RichText
-          v-if="project['Popular Education Text']"
-          class="field-value"
-          :text="project['Popular Education Text']"
-        />
-        <ul class="plain-list attachment-list">
-          <li
-            v-for="attachment in popularEducationAttachments"
-            :key="attachment.id"
-          >
-            <a :href="attachment.File[0].url" target="_blank">
-              <img :src="attachment.File[0].thumbnails.large.url" />
-            </a>
-          </li>
-        </ul>
-      </Field>
-      <Field v-if="project['Archive Text'] || archiveAttachments.length > 0">
+      <Field v-if="showArchive" class="archive-section">
         <h2>Archive</h2>
         <RichText
           v-if="project['Archive Text']"
           class="field-value"
           :text="project['Archive Text']"
         />
-        <ul class="plain-list attachment-list">
-          <li
-            v-for="attachment in archiveAttachments"
-            :key="attachment.id"
-          >
-            <a :href="attachment.File[0].url" target="_blank">
-              <img :src="attachment.File[0].thumbnails.large.url" />
-            </a>
-          </li>
-        </ul>
+        <Field v-if="project['Popular Education Text'] || popularEducationAttachments.length > 0">
+          <h3>Popular Education</h3>
+          <RichText
+            v-if="project['Popular Education Text']"
+            class="field-value"
+            :text="project['Popular Education Text']"
+          />
+          <ul class="plain-list attachment-list">
+            <li
+              v-for="attachment in popularEducationAttachments"
+              :key="attachment.id"
+            >
+              <a :href="attachment.File[0].url" target="_blank">
+                <img :src="attachment.File[0].thumbnails.large.url" />
+              </a>
+            </li>
+          </ul>
+        </Field>
+        <Field v-if="archiveAttachments.length > 0">
+          <h3>Reports</h3>
+          <RichText
+            v-if="project['Reports Text']"
+            class="field-value"
+            :text="project['Reports Text']"
+          />
+          <ul class="plain-list attachment-list">
+            <li
+              v-for="attachment in archiveAttachments"
+              :key="attachment.id"
+            >
+              <a :href="attachment.File[0].url" target="_blank">
+                <img :src="attachment.File[0].thumbnails.large.url" />
+              </a>
+            </li>
+          </ul>
+        </Field>
       </Field>
       <Field>
         <h2>Connect</h2>
@@ -126,6 +134,13 @@ export default {
     ...mapState(useProjectAttachmentsStore, {
       attachmentsByProject: 'byProject',
     }),
+
+    showArchive() {
+      return (
+        this.popularEducationAttachments?.length > 0 ||
+        this.archiveAttachments?.length > 0
+      );
+    },
 
     attachments() {
       return this.attachmentsByProject(this.project.id);
@@ -228,5 +243,26 @@ h1 {
 img {
   max-width: 100%;
   max-height: 25rem;
+}
+
+.archive-section h3 {
+  margin-bottom: 0;
+}
+
+.archive-section .field {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid black;
+}
+
+.archive-section .field:last-of-type {
+  border-bottom: none;
+}
+
+
+.archive-section img {
+  aspect-ratio: 0.65;
+  object-fit: cover;
 }
 </style>
