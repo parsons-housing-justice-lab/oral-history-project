@@ -67,7 +67,7 @@ const couldCollapse = computed(() => expanded.value && (interviews.value.length 
 
 .title a {
   font-weight: bold;
-  font-size: 1.25em;
+  font-size: 1.1em;
   text-decoration: underline;
 }
 
