@@ -1,6 +1,8 @@
 name: fetch-airtable
 
 on:
+  schedule:
+    - cron: "30 6/6 * * *"
   workflow_dispatch:
 
 permissions:
