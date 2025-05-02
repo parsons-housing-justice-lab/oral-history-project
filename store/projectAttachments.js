@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { getProjectAttachments } from "@/connectors/airtable";
+import { getProjectAttachments } from "@/connectors/file";
 
 export const useProjectAttachmentsStore = defineStore('projectAttachments', {
   state: () => ({

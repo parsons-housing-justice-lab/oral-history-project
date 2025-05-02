@@ -49,7 +49,7 @@ const groupMatchingInterviews = (groupedMatches, projects, interviews) => {
   return projects.map(project => {
     return {
       id: project.Id,
-      interviews: matchingInterviews.filter(m => m.projects.includes(project.id)),
+      interviews: matchingInterviews.filter(m => m.projects.includes(project.RecordId)),
     };
   });
 };

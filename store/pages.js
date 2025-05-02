@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { getPages, getPageSections } from "@/connectors/airtable";
+import { getPages, getPageSections } from "@/connectors/file";
 
 export const usePagesStore = defineStore('pages', {
   state: () => ({
