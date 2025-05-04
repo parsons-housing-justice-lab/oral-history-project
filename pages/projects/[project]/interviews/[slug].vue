@@ -9,8 +9,7 @@
     <div class="fields">
       <div class="row">
         <div v-if="interview.Photo" class="column">
-          <!-- TODO get more robustly -->
-          <img class="photo" :src="interview.Photo[0].url" />
+          <img class="photo" :src="interview.Photo.full" />
         </div>
         <FieldColumn class="tight-column">
           <Field label="Collection">

@@ -27,7 +27,7 @@
             class="interview-item"
           >
             <NuxtLink :to="`/projects/${project.Slug}/interviews/${interview.Slug}`">
-              <img :src="interview.Photo[0].thumbnails.large.url" />
+              <img :src="interview.Photo.thumbnail" />
               {{ interview.Name }}
             </NuxtLink>
           </li>
