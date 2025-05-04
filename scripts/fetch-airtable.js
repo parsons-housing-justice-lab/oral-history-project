@@ -51,6 +51,25 @@ const mapProject = async p => {
   };
 };
 
+const mapProjectAttachment = async p => {
+  const mapped = {
+    ...p,
+    RecordId: p.id,
+  };
+
+  if (p.File?.[0]?.thumbnails?.large?.url) {
+    const thumbnailUrl = await fetchImage(p.File[0].thumbnails.large.url, 'project-attachments', p.id, true);
+    if (thumbnailUrl) {
+      mapped.File = {
+        full: p.File[0].url,
+        thumbnail: thumbnailUrl,
+      };
+    }
+  }
+
+  return mapped;
+};
+
 const mapInterview = async i => {
   const mapped = {
     ...i,
@@ -80,5 +99,5 @@ await loadTable(getPageSections, 'pageSections');
 await loadTable(getPeople, 'people');
 await loadTable(getProjects, 'projects', mapProject);
 await loadTable(getInterviews, 'interviews', mapInterview);
-await loadTable(getProjectAttachments, 'projectAttachments');
+await loadTable(getProjectAttachments, 'projectAttachments', mapProjectAttachment);
 await loadTable(getTextBlocks, 'textBlocks');

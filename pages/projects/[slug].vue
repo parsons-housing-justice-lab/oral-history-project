@@ -71,8 +71,8 @@
               v-for="attachment in popularEducationAttachments"
               :key="attachment.id"
             >
-              <a :href="attachment.File[0].url" target="_blank">
-                <img :src="attachment.File[0].thumbnails.large.url" />
+              <a :href="attachment.File.full" target="_blank">
+                <img :src="attachment.File.thumbnail" />
               </a>
             </li>
           </ul>
@@ -89,8 +89,8 @@
               v-for="attachment in archiveAttachments"
               :key="attachment.id"
             >
-              <a :href="attachment.File[0].url" target="_blank">
-                <img :src="attachment.File[0].thumbnails.large.url" />
+              <a :href="attachment.File.full" target="_blank">
+                <img :src="attachment.File.thumbnail" />
               </a>
             </li>
           </ul>
