@@ -1,0 +1,51 @@
+name: fetch-airtable
+
+on:
+  schedule:
+    - cron: "30 6/6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+
+concurrency:
+  group: "fetch-airtable"
+  cancel-in-progress: true
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup node env
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: yarn
+
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            dist
+            .nuxt
+          key: ${{ runner.os }}-nuxt-build-${{ hashFiles('dist') }}
+          restore-keys: |
+            ${{ runner.os }}-nuxt-build-
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Fetch airtable
+        run: yarn fetch-airtable
+
+      - name: Commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: public/content
+          default_author: github_actions
+          message: "Update content with fetch-airtable"

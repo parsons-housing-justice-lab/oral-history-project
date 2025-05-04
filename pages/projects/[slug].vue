@@ -8,7 +8,7 @@
 
     <FieldColumn>
       <Field v-if="project.Photo">
-        <img class="photo" :src="project.Photo[0].url" />
+        <img class="photo" :src="project.Photo" />
       </Field>
       <Field v-if="project.About">
         <h2>About</h2>
@@ -115,55 +115,43 @@
   </div>
 </template>
 
-<script>
-import { mapState } from 'pinia';
+<script setup>
 import { useInterviewsStore } from '@/store/interviews';
 import { useProjectsStore } from '@/store/projects';
 import { useProjectAttachmentsStore } from '@/store/projectAttachments';
 
-export default {
-  computed: {
-    ...mapState(useProjectsStore, {
-      projectBySlug: 'bySlug',
-    }),
+const projectsStore = useProjectsStore();
+const interviewsStore = useInterviewsStore();
+const projectsAttachmentsStore  = useProjectAttachmentsStore();
 
-    ...mapState(useInterviewsStore, {
-      interviewsByProject: 'byProject',
-    }),
+const route = useRoute();
 
-    ...mapState(useProjectAttachmentsStore, {
-      attachmentsByProject: 'byProject',
-    }),
+const project = computed(() => {
+  return projectsStore.bySlug(route.params.slug)?.[0] ?? {};
+});
 
-    showArchive() {
-      return (
-        this.popularEducationAttachments?.length > 0 ||
-        this.archiveAttachments?.length > 0
-      );
-    },
+const attachments = computed(() => {
+  return projectsAttachmentsStore.byProject(project.value.RecordId);
+});
 
-    attachments() {
-      return this.attachmentsByProject(this.project.id);
-    },
+const archiveAttachments = computed(() => {
+  return attachments.value.filter(({ Section }) => Section === 'Archive');
+});
 
-    archiveAttachments() {
-      return this.attachments.filter(({ Section }) => Section === 'Archive');
-    },
+const popularEducationAttachments = computed(() => {
+  return attachments.value.filter(({ Section }) => Section === 'Popular Education');
+});
 
-    popularEducationAttachments() {
-      return this.attachments
-        .filter(({ Section }) => Section === 'Popular Education');
-    },
+const showArchive = computed(() => {
+  return (
+    popularEducationAttachments.value?.length > 0 ||
+    archiveAttachments.value?.length > 0
+  );
+});
 
-    interviews() {
-      return this.interviewsByProject(this.project.id);
-    },
-
-    project() {
-      return this.projectBySlug(this.$route.params.slug)?.[0] ?? {};
-    },
-  },
-}
+const interviews = computed(() => {
+  return interviewsStore.byProject(project.value.RecordId);
+});
 </script>
 
 <style scoped>

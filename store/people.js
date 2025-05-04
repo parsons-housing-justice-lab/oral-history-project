@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { getPeople } from "@/connectors/airtable";
+import { getPeople } from "@/connectors/file";
 
 export const usePeopleStore = defineStore('people', {
   state: () => ({

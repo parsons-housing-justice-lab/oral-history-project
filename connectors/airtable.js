@@ -10,7 +10,7 @@ import {
   AIRTABLE_PROJECTS_TABLE,
   AIRTABLE_PROJECT_ATTACHMENTS_TABLE,
   AIRTABLE_TEXT_BLOCKS_TABLE,
-} from "@/constants";
+} from "../constants.js";
 
 const getRecords = async (table, selectOptions = {}, progressCallback = null) => {
   const base = new Airtable({apiKey: AIRTABLE_API_KEY}).base(AIRTABLE_DATABASE_ID);

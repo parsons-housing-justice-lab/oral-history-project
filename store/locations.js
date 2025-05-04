@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { getLocations } from "@/connectors/airtable";
+import { getLocations } from "@/connectors/file";
 import { toGeoJson, toPolygonGeoJson } from '@/transformers/locations';
 
 export const useLocationsStore = defineStore('locations', {

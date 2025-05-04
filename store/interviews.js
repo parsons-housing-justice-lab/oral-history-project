@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { getInterviews } from "@/connectors/airtable";
+import { getInterviews } from "@/connectors/file";
 
 export const useInterviewsStore = defineStore('interviews', {
   state: () => ({

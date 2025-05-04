@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { getTextBlocks } from "@/connectors/airtable";
+import { getTextBlocks } from "@/connectors/file";
 
 export const useTextBlocksStore = defineStore('textBlocks', {
   state: () => ({
