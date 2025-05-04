@@ -93,11 +93,24 @@ const mapInterview = async i => {
   return mapped;
 };
 
+const sleep = async (ms) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 await loadTable(getLocations, 'locations');
+await sleep(500);
 await loadTable(getPages, 'pages');
+await sleep(500);
 await loadTable(getPageSections, 'pageSections');
+await sleep(500);
 await loadTable(getPeople, 'people');
+await sleep(500);
 await loadTable(getProjects, 'projects', mapProject);
+await sleep(500);
 await loadTable(getInterviews, 'interviews', mapInterview);
+await sleep(500);
 await loadTable(getProjectAttachments, 'projectAttachments', mapProjectAttachment);
+await sleep(500);
 await loadTable(getTextBlocks, 'textBlocks');
