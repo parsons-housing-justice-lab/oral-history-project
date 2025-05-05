@@ -42,6 +42,28 @@ const fetchImage = async (url, table, id, isThumbnail = false) => {
   return finalUrl;
 };
 
+const fetchFile = async (url, table, id) => {
+  let finalUrl = null;
+
+  try {
+    const response = await fetch(url);
+    const ext = mime.extension(response.headers.get('content-type'));
+    if (ext === 'pptx') return null;
+    const arrayBuffer = await response.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    const fileName = `${id}_full`;
+    const filePath = `files/${table}/${fileName}.${ext}`;
+    await fs.writeFile(`${baseOutputDir}/${filePath}`, buffer);
+    finalUrl = `/content/${filePath}`;
+  }
+  catch (error) {
+    console.error(error);
+  }
+
+  return finalUrl;
+};
+
 const mapProject = async p => {
   const photoUrl = await fetchImage(p.Photo[0].url, 'projects', p.id);
   return {
@@ -57,14 +79,22 @@ const mapProjectAttachment = async p => {
     RecordId: p.id,
   };
 
+  let fileUrl = null;
+  let thumbnailUrl = null;
+
+  if (p.File?.[0]?.url) {
+    fileUrl = await fetchFile(p.File[0].url, 'project-attachments', p.id, true);
+  }
+
   if (p.File?.[0]?.thumbnails?.large?.url) {
-    const thumbnailUrl = await fetchImage(p.File[0].thumbnails.large.url, 'project-attachments', p.id, true);
-    if (thumbnailUrl) {
-      mapped.File = {
-        full: p.File[0].url,
-        thumbnail: thumbnailUrl,
-      };
-    }
+    thumbnailUrl = await fetchImage(p.File[0].thumbnails.large.url, 'project-attachments', p.id, true);
+  }
+
+  if (fileUrl || thumbnailUrl) {
+    mapped.File = {};
+
+    if (fileUrl) mapped.File.full = fileUrl;
+    if (thumbnailUrl) mapped.File.thumbnail = thumbnailUrl;
   }
 
   return mapped;
