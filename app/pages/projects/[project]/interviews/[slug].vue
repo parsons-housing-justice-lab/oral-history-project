@@ -33,6 +33,7 @@
           </Field>
         </FieldColumn>
         <FieldColumn class="description-column-right">
+          <!-- TODO subcategories? -->
           <Field v-if="interview.Themes" label="Themes">
             <RichText :text="interview.Themes" />
           </Field>

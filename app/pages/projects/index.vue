@@ -8,6 +8,7 @@
       </div>
       <div class="filters-row">
         <select v-model="selectedTheme">
+          <!-- TODO subcategories -->
           <option value="">search by theme</option>
           <option
             v-for="theme in themes"
