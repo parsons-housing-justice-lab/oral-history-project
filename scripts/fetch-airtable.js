@@ -8,7 +8,7 @@ import {
   getProjects,
   getProjectAttachments,
   getTextBlocks,
-} from "../connectors/airtable.js";
+} from "../app/connectors/airtable.js";
 import mime from 'mime-types';
 
 
