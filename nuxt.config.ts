@@ -1,4 +1,6 @@
 import svgLoader from 'vite-svg-loader';
+import interviews from './public/content/interviews.json'
+import projects from './public/content/projects.json'
 
 export default defineNuxtConfig({
   vite: {
@@ -7,14 +9,28 @@ export default defineNuxtConfig({
     ],
   },
 
-  generate: {
-    fallback: true,
+  nitro: {
+    prerender: {
+      routes: [
+        ...projects.map(p => `/projects/${p.Slug}`),
+        ...interviews
+          .map(i => {
+            // TODO bad slug in cities for people
+            const project = projects.find(p => p.RecordId === i.Projects[0]);
+            if (project.Slug.includes(',')) return null;
+            return `/projects/${project.Slug}/interviews/${i.Slug}`;
+          })
+          .filter(v => !!v),
+      ]
+    },
   },
 
-  modules: [
-    '@pinia/nuxt',
-    '@nuxtjs/google-fonts',
-  ],
+  modules: ['@pinia/nuxt', '@nuxtjs/google-fonts', '@nuxtjs/sitemap'],
+
+  site: {
+    url: 'https://housingjusticeoralhistory.org',
+    name: 'Housing Justice Oral History Project',
+  },
 
   postcss: {
     plugins: {
