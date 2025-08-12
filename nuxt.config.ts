@@ -15,7 +15,6 @@ export default defineNuxtConfig({
         ...projects.map(p => `/projects/${p.Slug}`),
         ...interviews
           .map(i => {
-            // TODO bad slug in cities for people
             const project = projects.find(p => p.RecordId === i.Projects[0]);
             if (project.Slug.includes(',')) return null;
             return `/projects/${project.Slug}/interviews/${i.Slug}`;
