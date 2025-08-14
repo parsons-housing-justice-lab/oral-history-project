@@ -9,9 +9,12 @@ export default defineNuxtConfig({
     ],
   },
 
+  ssr: true,
+
   nitro: {
     prerender: {
       routes: [
+        '/',
         ...projects.map(p => `/projects/${p.Slug}`),
         ...interviews
           .map(i => {

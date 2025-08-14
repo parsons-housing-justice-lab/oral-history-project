@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useResizeObserver } from '@vueuse/core';
 import { useLocationsStore } from '@/store/locations';
@@ -70,15 +70,14 @@ useResizeObserver(sidebarRef, (entries) => {
   sidebarWidth.value = entry.contentRect.width;
 });
 
-onMounted(() => {
-  locationsStore.loadLocations();
-  textBlocksStore.loadTextBlocks();
-  pagesStore.loadPages();
-  peopleStore.loadPeople();
-  projectsStore.loadProjects();
-  projectAttachmentsStore.loadProjectAttachments();
-  interviewsStore.loadInterviews();
-});
+interviewsStore.interviews = (await useFetch('/api/interviews')).data;
+locationsStore.locations = (await useFetch('/api/locations')).data;
+pagesStore.pages = (await useFetch('/api/pages')).data;
+peopleStore.people = (await useFetch('/api/people')).data;
+projectsStore.projects = (await useFetch('/api/projects')).data;
+projectAttachmentsStore.projectAttachments = (await
+  useFetch('/api/projectAttachments')).data;
+textBlocksStore.textBlocks = (await useFetch('/api/textBlocks')).data;
 
 const title = computed(() => textBlocksStore.byType('Title')[0]);
 const { show: welcomeShown } = storeToRefs(welcomeStore);
