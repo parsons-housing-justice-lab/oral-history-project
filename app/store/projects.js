@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import { getProjects } from "@/connectors/file";
 
 export const useProjectsStore = defineStore('projects', {
   state: () => ({
@@ -15,19 +14,5 @@ export const useProjectsStore = defineStore('projects', {
 
     bySlug: state => slug => state.projects
       .filter(({ Slug }) => Slug === slug),
-  },
-
-  actions: {
-    async loadProjects() {
-      if (this.projects.length > 0) return;
-      let projects = await getProjects();
-
-      projects = projects.map(p => ({
-        ...p,
-        Site: p.Site.startsWith('http') ? p.Site : `https://${p.Site}`,
-      }));
-
-      this.projects = projects;
-    },
   },
 });

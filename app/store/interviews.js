@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import { getInterviews } from "@/connectors/file";
 
 export const useInterviewsStore = defineStore('interviews', {
   state: () => ({
@@ -18,18 +17,5 @@ export const useInterviewsStore = defineStore('interviews', {
 
     byProject: state => id => state.interviews
       .filter(({ Projects }) => Projects?.includes(id)) ?? false,
-  },
-
-  actions: {
-    async loadInterviews() {
-      if (this.interviews.length > 0) return;
-      this.interviews = (await getInterviews()).map((interview) => ({
-        ...interview,
-        Transcription: [
-          interview.Transcription,
-          interview['Transcription 2'],
-        ].filter(v => !!v).join('\n')
-      }));
-    },
   },
 });

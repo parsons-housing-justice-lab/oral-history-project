@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import { getTextBlocks } from "@/connectors/file";
 
 export const useTextBlocksStore = defineStore('textBlocks', {
   state: () => ({
@@ -10,11 +9,5 @@ export const useTextBlocksStore = defineStore('textBlocks', {
     byType: state => type => state.textBlocks
       .filter(({ Type }) => Type === type)
       .map(({ Content }) => Content.trim()),
-  },
-
-  actions: {
-    async loadTextBlocks() {
-      this.textBlocks = await getTextBlocks();
-    },
   },
 });
