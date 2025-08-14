@@ -11,6 +11,10 @@ export default defineNuxtConfig({
 
   ssr: true,
 
+  experimental: {
+    payloadExtraction: false,
+  },
+
   nitro: {
     prerender: {
       routes: [
