@@ -8,14 +8,20 @@
       </div>
       <div class="filters-row">
         <select v-model="selectedTheme">
-          <!-- TODO subcategories -->
           <option value="">search by theme</option>
-          <option
+          <optgroup
             v-for="theme in themes"
-            :key="theme"
+            :key="theme.id"
+            :label="theme.name"
           >
-            {{ theme }}
-          </option>
+            <option
+              v-for="subtheme in theme.subthemes"
+              :key="subtheme.id"
+              :value="subtheme.id"
+            >
+              {{ subtheme.name }}
+            </option>
+          </optgroup>
         </select>
         <select v-model="selectedCategory">
           <option value="">search by category</option>
@@ -40,6 +46,7 @@
 <script setup>
 import { useInterviewsStore } from '@/store/interviews';
 import { useProjectsStore } from '@/store/projects';
+import { useThemesStore } from '@/store/themes';
 
 const selectedTheme = ref('');
 const selectedCategory = ref('');
@@ -47,31 +54,24 @@ const searchInput = ref('');
 
 const interviewsStore = useInterviewsStore();
 const projectsStore = useProjectsStore();
+const themesStore = useThemesStore();
 
 const interviews = computed(() => interviewsStore.interviews);
 const projects = computed(() => projectsStore.projects);
+const { themes } = storeToRefs(themesStore);
 
 const filteredProjects = computed(() => {
   return projects.value
     .filter((project) => {
       let match = true;
       if (selectedTheme.value !== '') {
-        match = project?.Themes?.includes(selectedTheme.value) ?? false;
+        match = project?.['Themes (new)']?.includes(selectedTheme.value) ?? false;
       }
       if (selectedCategory.value !== '') {
         match = project?.Keywords?.includes(selectedCategory.value) ?? false;
       }
       return match;
     })
-});
-
-const themes = computed(() => {
-  const allThemes = projects.value
-    .map(({ Themes }) => Themes)
-    .flat()
-    .filter(theme => !!theme);
-  return [...new Set(allThemes)]
-    .sort((a, b) => a.localeCompare(b));
 });
 
 const categories = computed(() => {

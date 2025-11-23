@@ -10,6 +10,8 @@ import {
   AIRTABLE_PROJECTS_TABLE,
   AIRTABLE_PROJECT_ATTACHMENTS_TABLE,
   AIRTABLE_TEXT_BLOCKS_TABLE,
+  AIRTABLE_THEMES_TABLE,
+  AIRTABLE_SUBTHEMES_TABLE,
 } from "../constants.js";
 
 const getRecords = async (table, selectOptions = {}, progressCallback = null) => {
@@ -96,4 +98,12 @@ export const getProjectAttachments = async () => {
 
 export const getTextBlocks = async () => {
   return await getRecords(AIRTABLE_TEXT_BLOCKS_TABLE);
+};
+
+export const getThemes = async () => {
+  return await getRecords(AIRTABLE_THEMES_TABLE);
+};
+
+export const getSubthemes = async () => {
+  return await getRecords(AIRTABLE_SUBTHEMES_TABLE);
 };

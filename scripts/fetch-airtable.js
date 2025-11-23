@@ -8,6 +8,8 @@ import {
   getProjects,
   getProjectAttachments,
   getTextBlocks,
+  getThemes,
+  getSubthemes,
 } from "../app/connectors/airtable.js";
 import mime from 'mime-types';
 
@@ -144,3 +146,7 @@ await sleep(500);
 await loadTable(getProjectAttachments, 'projectAttachments', mapProjectAttachment);
 await sleep(500);
 await loadTable(getTextBlocks, 'textBlocks');
+await sleep(500);
+await loadTable(getThemes, 'themes');
+await sleep(500);
+await loadTable(getSubthemes, 'subthemes');

@@ -37,6 +37,7 @@ import { usePeopleStore } from '@/store/people';
 import { useProjectAttachmentsStore } from '@/store/projectAttachments';
 import { useInterviewsStore } from '@/store/interviews';
 import { useProjectsStore } from '@/store/projects';
+import { useThemesStore } from '@/store/themes';
 
 const interviewsStore = useInterviewsStore();
 const locationsStore = useLocationsStore();
@@ -45,6 +46,7 @@ const peopleStore = usePeopleStore();
 const projectAttachmentsStore = useProjectAttachmentsStore();
 const projectsStore = useProjectsStore();
 const textBlocksStore = useTextBlocksStore();
+const themesStore = useThemesStore();
 const welcomeStore = useWelcomeStore();
 
 const route = useRoute();
@@ -78,6 +80,7 @@ projectsStore.projects = (await useFetch('/api/projects')).data;
 projectAttachmentsStore.projectAttachments = (await
   useFetch('/api/projectAttachments')).data;
 textBlocksStore.textBlocks = (await useFetch('/api/textBlocks')).data;
+themesStore.themes = (await useFetch('/api/themes')).data;
 
 const title = computed(() => textBlocksStore.byType('Title')[0]);
 const { show: welcomeShown } = storeToRefs(welcomeStore);
