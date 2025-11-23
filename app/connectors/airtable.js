@@ -14,8 +14,8 @@ import {
   AIRTABLE_SUBTHEMES_TABLE,
 } from "../constants.js";
 
-const getRecords = async (table, selectOptions = {}, progressCallback = null) => {
-  const base = new Airtable({apiKey: AIRTABLE_API_KEY}).base(AIRTABLE_DATABASE_ID);
+const getRecords = async (table, apiKey, selectOptions = {}, progressCallback = null) => {
+  const base = new Airtable({apiKey}).base(AIRTABLE_DATABASE_ID);
 
   return new Promise((resolve, reject) => {
     let allRecords = [];
@@ -46,14 +46,14 @@ const getRecords = async (table, selectOptions = {}, progressCallback = null) =>
   });
 };
 
-export const getLocations = async () => {
-  return await getRecords(AIRTABLE_LOCATIONS_TABLE, {
+export const getLocations = async (apiKey) => {
+  return await getRecords(AIRTABLE_LOCATIONS_TABLE, apiKey, {
     filterByFormula: "{Status} = 'Published'",
   });
 };
 
-export const getInterviews = async () => {
-  return await getRecords(AIRTABLE_INTERVIEWS_TABLE, {
+export const getInterviews = async (apiKey) => {
+  return await getRecords(AIRTABLE_INTERVIEWS_TABLE, apiKey, {
     filterByFormula: "{Status} = 'Published'",
     sort: [
       { field: 'Name' },
@@ -61,16 +61,16 @@ export const getInterviews = async () => {
   });
 };
 
-export const getPages = async () => {
-  return await getRecords(AIRTABLE_PAGES_TABLE);
+export const getPages = async (apiKey) => {
+  return await getRecords(AIRTABLE_PAGES_TABLE, apiKey);
 };
 
-export const getPageSections = async () => {
-  return await getRecords(AIRTABLE_PAGE_SECTIONS_TABLE);
+export const getPageSections = async (apiKey) => {
+  return await getRecords(AIRTABLE_PAGE_SECTIONS_TABLE, apiKey);
 };
 
-export const getPeople = async () => {
-  return await getRecords(AIRTABLE_PEOPLE_TABLE, {
+export const getPeople = async (apiKey) => {
+  return await getRecords(AIRTABLE_PEOPLE_TABLE, apiKey, {
     filterByFormula: "{Status} = 'Published'",
     sort: [
       { field: 'Order' },
@@ -78,8 +78,8 @@ export const getPeople = async () => {
   });
 };
 
-export const getProjects = async () => {
-  return await getRecords(AIRTABLE_PROJECTS_TABLE, {
+export const getProjects = async (apiKey) => {
+  return await getRecords(AIRTABLE_PROJECTS_TABLE, apiKey, {
     filterByFormula: "{Status} = 'Published'",
     sort: [
       { field: 'Name' },
@@ -87,8 +87,8 @@ export const getProjects = async () => {
   });
 };
 
-export const getProjectAttachments = async () => {
-  return await getRecords(AIRTABLE_PROJECT_ATTACHMENTS_TABLE, {
+export const getProjectAttachments = async (apiKey) => {
+  return await getRecords(AIRTABLE_PROJECT_ATTACHMENTS_TABLE, apiKey, {
     filterByFormula: "{Status} = 'Published'",
     sort: [
       { field: 'Name' },
@@ -96,14 +96,14 @@ export const getProjectAttachments = async () => {
   });
 };
 
-export const getTextBlocks = async () => {
-  return await getRecords(AIRTABLE_TEXT_BLOCKS_TABLE);
+export const getTextBlocks = async (apiKey) => {
+  return await getRecords(AIRTABLE_TEXT_BLOCKS_TABLE, apiKey);
 };
 
-export const getThemes = async () => {
-  return await getRecords(AIRTABLE_THEMES_TABLE);
+export const getThemes = async (apiKey) => {
+  return await getRecords(AIRTABLE_THEMES_TABLE, apiKey);
 };
 
-export const getSubthemes = async () => {
-  return await getRecords(AIRTABLE_SUBTHEMES_TABLE);
+export const getSubthemes = async (apiKey) => {
+  return await getRecords(AIRTABLE_SUBTHEMES_TABLE, apiKey);
 };
