@@ -43,12 +43,20 @@
       </Field>
       <Field v-if="project.Themes">
         <h2>Overarching Themes</h2>
-        <ul class="plain-list">
+        <ul class="themes-list">
           <li
-            v-for="theme in project.Themes"
-            :key="theme"
+            v-for="theme in themes"
+            :key="theme.id"
           >
-            {{ theme }}
+            {{ theme.name }}
+            <ul>
+              <li
+                v-for="subtheme in theme.subthemes"
+                :key="subtheme.id"
+              >
+                {{ subtheme.name }}
+              </li>
+            </ul>
           </li>
         </ul>
       </Field>
@@ -119,10 +127,12 @@
 import { useInterviewsStore } from '@/store/interviews';
 import { useProjectsStore } from '@/store/projects';
 import { useProjectAttachmentsStore } from '@/store/projectAttachments';
+import { useThemesStore } from '@/store/themes';
 
 const projectsStore = useProjectsStore();
 const interviewsStore = useInterviewsStore();
 const projectsAttachmentsStore  = useProjectAttachmentsStore();
+const themesStore  = useThemesStore();
 
 const route = useRoute();
 
@@ -151,6 +161,10 @@ const showArchive = computed(() => {
 
 const interviews = computed(() => {
   return interviewsStore.byProject(project.value.RecordId);
+});
+
+const themes = computed(() => {
+  return themesStore.byId(project.value['Themes (new)']);
 });
 </script>
 
@@ -252,5 +266,9 @@ img {
 .archive-section img {
   aspect-ratio: 0.65;
   object-fit: cover;
+}
+
+.themes-list {
+  text-transform: capitalize;
 }
 </style>

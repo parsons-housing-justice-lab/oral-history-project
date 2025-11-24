@@ -1,6 +1,5 @@
 import Airtable from "airtable";
 import {
-  AIRTABLE_API_KEY,
   AIRTABLE_DATABASE_ID,
   AIRTABLE_LOCATIONS_TABLE,
   AIRTABLE_INTERVIEWS_TABLE,
