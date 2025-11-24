@@ -7,7 +7,7 @@
         <input v-model="searchInput" type="search" placeholder="Search within oral histories" />
       </div>
       <div class="filters-row">
-        <select v-model="selectedTheme">
+        <select v-model="selectedTheme" class="themes-input">
           <option value="">search by theme</option>
           <optgroup
             v-for="theme in themes"
@@ -144,5 +144,9 @@ input[type="search"] {
   font-size: 0.9em;
   margin-bottom: 1rem;
   font-style: italic;
+}
+
+.themes-input {
+  text-transform: capitalize;
 }
 </style>
