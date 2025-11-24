@@ -8,15 +8,18 @@ import {
   getProjects,
   getProjectAttachments,
   getTextBlocks,
+  getThemes,
+  getSubthemes,
 } from "../app/connectors/airtable.js";
 import mime from 'mime-types';
 
 
 const baseOutputDir = 'public/content';
 const baseOutputImageDir = `${baseOutputDir}/images`;
+const apiKey = process.env.AIRTABLE_API_KEY;
 
 const loadTable = async (fetchFn, tableName, mapFn = d => d) => {
-  const records = await fetchFn();
+  const records = await fetchFn(apiKey);
   const mapped = await Promise.all(records.map(mapFn));
   await fs.writeFile(`${baseOutputDir}/${tableName}.json`, JSON.stringify(mapped));
 };
@@ -144,3 +147,7 @@ await sleep(500);
 await loadTable(getProjectAttachments, 'projectAttachments', mapProjectAttachment);
 await sleep(500);
 await loadTable(getTextBlocks, 'textBlocks');
+await sleep(500);
+await loadTable(getThemes, 'themes');
+await sleep(500);
+await loadTable(getSubthemes, 'subthemes');

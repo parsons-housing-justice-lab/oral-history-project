@@ -30,6 +30,8 @@ jobs:
         run: yarn install
 
       - name: Fetch airtable
+        env:
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
         run: yarn fetch-airtable
 
       - name: Commit
