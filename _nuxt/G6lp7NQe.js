@@ -1,0 +1,1 @@
+import{_ as r}from"./Trzu7B2r.js";import{_ as t,e,o as n}from"./BdRrNSXW.js";import"./Cvu1Dgpu.js";import"./CdizknS0.js";const c={};function a(s,_){const o=r;return n(),e(o,{name:"Why Oral History?"})}const l=t(c,[["render",a]]);export{l as default};

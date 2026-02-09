@@ -1,0 +1,1 @@
+import{c as r,o as n}from"./BdRrNSXW.js";const c=["innerHTML"],i={__name:"RichText",props:{text:String},setup(e){return(t,o)=>(n(),r("div",{class:"rich-text",innerHTML:t.$mdRenderer.render(e.text||"")},null,8,c))}};export{i as _};

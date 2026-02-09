@@ -1,0 +1,1 @@
+import{Y as t}from"./BdRrNSXW.js";const l=t("people",{state:()=>({people:[]}),getters:{team:e=>e.people.filter(({Type:o})=>o==="Team"),collaborators:e=>e.people.filter(({Type:o})=>o==="Collaborator")}});export{l as u};

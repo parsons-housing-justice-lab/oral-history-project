@@ -1,0 +1,1 @@
+import{Y as s}from"./BdRrNSXW.js";const o=s("projectAttachments",{state:()=>({projectAttachments:[]}),getters:{byProject:t=>e=>t.projectAttachments.filter(({Project:r})=>r?.includes(e))??!1}});export{o as u};

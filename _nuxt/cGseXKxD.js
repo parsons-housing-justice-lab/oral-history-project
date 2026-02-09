@@ -1,1 +1,0 @@
-import{_ as n}from"./CzOXtKNA.js";import{o as t,c as o,a as s,t as c,b as m}from"./DEx55Oms.js";const r={class:"page-wide"},d={__name:"ContentPage",props:{name:String},setup(e){return(_,i)=>{const a=n;return t(),o("div",r,[s("h1",null,c(e.name),1),m(a,{name:e.name},null,8,["name"])])}}};export{d as _};

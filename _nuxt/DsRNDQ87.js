@@ -1,1 +1,0 @@
-import{A as t}from"./DEx55Oms.js";import{e as p}from"./D43SHYPB.js";const a=t("people",{state:()=>({people:[]}),getters:{team:e=>e.people.filter(({Type:o})=>o==="Team"),collaborators:e=>e.people.filter(({Type:o})=>o==="Collaborator")},actions:{async loadPeople(){this.people.length>0||(this.people=await p())}}});export{a as u};

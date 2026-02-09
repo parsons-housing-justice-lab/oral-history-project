@@ -1,0 +1,1 @@
+import{_ as t}from"./Trzu7B2r.js";import{_ as e,e as n,o as c}from"./BdRrNSXW.js";import"./Cvu1Dgpu.js";import"./CdizknS0.js";const r={};function _(a,s){const o=t;return c(),n(o,{name:"About"})}const u=e(r,[["render",_]]);export{u as default};

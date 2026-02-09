@@ -1,0 +1,1 @@
+import{Y as n}from"./BdRrNSXW.js";const h=n("themes",{state:()=>({themes:[]}),getters:{byId:s=>r=>s.themes.map(e=>{const t=e.subthemes.filter(({id:m})=>r?.includes(m)??!1);return t.length===0?null:{...e,subthemes:t}}).filter(e=>!!e)}});export{h as u};

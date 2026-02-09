@@ -1,0 +1,1 @@
+import{_ as n}from"./Cvu1Dgpu.js";import{c as t,o,a as s,b as c,t as m}from"./BdRrNSXW.js";const r={class:"page-wide"},d={__name:"ContentPage",props:{name:String},setup(e){return(_,i)=>{const a=n;return o(),t("div",r,[s("h1",null,m(e.name),1),c(a,{name:e.name},null,8,["name"])])}}};export{d as _};
