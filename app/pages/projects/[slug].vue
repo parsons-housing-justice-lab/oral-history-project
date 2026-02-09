@@ -33,33 +33,6 @@
           </li>
         </ul>
       </Field>
-      <Field v-if="project.Goals">
-        <h2>Values, Purpose, and Methods</h2>
-        <RichText class="field-value" :text="project.Goals" />
-      </Field>
-      <Field v-if="project.Team">
-        <h2>Team and Collaborators</h2>
-        <RichText class="field-value" :text="project.Team" />
-      </Field>
-      <Field v-if="project.Themes">
-        <h2>Overarching Themes</h2>
-        <ul class="themes-list">
-          <li
-            v-for="theme in themes"
-            :key="theme.id"
-          >
-            {{ theme.name }}
-            <ul>
-              <li
-                v-for="subtheme in theme.subthemes"
-                :key="subtheme.id"
-              >
-                {{ subtheme.name }}
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </Field>
       <Field v-if="showArchive" class="archive-section">
         <h2>Archive</h2>
         <RichText
@@ -103,6 +76,33 @@
             </li>
           </ul>
         </Field>
+      </Field>
+      <Field v-if="project.Goals">
+        <h2>Values, Purpose, and Methods</h2>
+        <RichText class="field-value" :text="project.Goals" />
+      </Field>
+      <Field v-if="project.Team">
+        <h2>Team and Collaborators</h2>
+        <RichText class="field-value" :text="project.Team" />
+      </Field>
+      <Field v-if="project.Themes">
+        <h2>Overarching Themes</h2>
+        <ul class="themes-list">
+          <li
+            v-for="theme in themes"
+            :key="theme.id"
+          >
+            {{ theme.name }}
+            <ul>
+              <li
+                v-for="subtheme in theme.subthemes"
+                :key="subtheme.id"
+              >
+                {{ subtheme.name }}
+              </li>
+            </ul>
+          </li>
+        </ul>
       </Field>
       <Field>
         <h2>Connect</h2>
