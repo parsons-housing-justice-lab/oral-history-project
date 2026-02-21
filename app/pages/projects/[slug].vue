@@ -85,7 +85,7 @@
         <h2>Team and Collaborators</h2>
         <RichText class="field-value" :text="project.Team" />
       </Field>
-      <Field v-if="project.Themes">
+      <Field v-if="project.Themes && project['Show Themes']">
         <h2>Overarching Themes</h2>
         <ul class="themes-list">
           <li
