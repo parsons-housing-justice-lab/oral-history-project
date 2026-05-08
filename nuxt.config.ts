@@ -22,6 +22,7 @@ export default defineNuxtConfig({
         ...projects.map(p => `/projects/${p.Slug}`),
         ...interviews
           .map(i => {
+            if (i.Status !== 'Published') return null;
             const project = projects.find(p => p.RecordId === i.Projects[0]);
             if (project.Slug.includes(',')) return null;
             return `/projects/${project.Slug}/interviews/${i.Slug}`;
