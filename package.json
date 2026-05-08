@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "postinstall": "nuxt prepare",
+    "postinstall": "echo 'nuxt prepare'",
     "deploy": "gh-pages --dotfiles -d .output/public",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "fetch-airtable": "node scripts/fetch-airtable.js"
